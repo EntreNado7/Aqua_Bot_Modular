@@ -26,8 +26,8 @@ PAGE_TOKEN = os.getenv("PAGE_TOKEN")
 # ==========================================
 # 🗣️ "CUERDAS VOCALES" (Envío a WhatsApp)
 # ==========================================
-def enviar_mensaje_wa(telefono, texto_respuesta):
-    """Toma la respuesta del bot y la dispara hacia el celular del cliente."""
+def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None):
+    """Envía un mensaje de texto, o una imagen con texto adjunto (caption)."""
     url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
     
     headers = {
@@ -35,12 +35,25 @@ def enviar_mensaje_wa(telefono, texto_respuesta):
         "Content-Type": "application/json"
     }
     
-    payload = {
-        "messaging_product": "whatsapp",
-        "to": telefono,
-        "type": "text",
-        "text": {"body": texto_respuesta}
-    }
+    # Si la función recibe una URL de imagen, arma un paquete multimedia
+    if url_imagen:
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": telefono,
+            "type": "image",
+            "image": {
+                "link": url_imagen,
+                "caption": texto_respuesta
+            }
+        }
+    # Si no hay imagen, manda texto normal
+    else:
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": telefono,
+            "type": "text",
+            "text": {"body": texto_respuesta}
+        }
     
     try:
         respuesta = requests.post(url, headers=headers, json=payload)
@@ -50,7 +63,6 @@ def enviar_mensaje_wa(telefono, texto_respuesta):
             print(f"Error de Meta al enviar: {respuesta.text}")
     except Exception as e:
         print(f"Error interno al enviar: {e}")
-
 # ==========================================
 # ⏰ RELOJ INTERNO (Horario Hábil)
 # ==========================================
