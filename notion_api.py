@@ -24,12 +24,13 @@ def verificar_cliente(telefono):
     Busca si el número de teléfono ya existe en la base de datos de Notion.
     Retorna el ID de la página si existe, o None si es un cliente nuevo.
     """
-    url = f"https://api.api.notion.com/v1/databases/{DATABASE_ID}/query"
+    # URL corregida: https://api.notion.com/...
+    url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
     
     payload = {
         "filter": {
             "property": "Telefono",
-            "title": {  # Corregido: Telefono es la columna Title (Aa)
+            "title": {  
                 "equals": telefono
             }
         }
