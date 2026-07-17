@@ -87,31 +87,38 @@ def procesar_mensaje(identificador, texto):
     cliente_id = notion_api.verificar_cliente(identificador)
     if not cliente_id:
         notion_api.registrar_lead(identificador)
-        return "¡Hola! Soy Aqua 💧, el asistente virtual de Acuática. Parece que eres nuevo por aquí. ¿En qué te puedo ayudar hoy? (Ej. Horarios, Costos, Ubicación)"
+        return respuestas.MENSAJES["bienvenida_nueva"], None
 
     # 2. BOTÓN DE ASESOR (HANDOFF)
-    if "asesor" in texto or "humano" in texto:
+    if "asesor" in texto or "humano" in texto or "recepcion" in texto:
         notion_api.solicitar_humano(cliente_id)
-        return "¡Claro! He notificado a uno de nuestros asesores. Te contactarán lo más pronto posible."
+        return respuestas.MENSAJES["traspaso_horario_habil"], None
 
-    # 3. INTELIGENCIA CONVERSACIONAL (TheFuzz)
-    # Lista de "intenciones" que Aqua sabe reconocer
-    intenciones = ["horarios", "costos", "ubicacion", "promociones", "requisitos"]
+    # 3. INTELIGENCIA CONVERSACIONAL (TheFuzz + Catálogo Visual)
+    # Creamos un mapa relacionando cada palabra clave con su categoría
+    mapeo_palabras = {}
+    for categoria, datos in menu_imagenes.CATALOGO_IMAGENES.items():
+        for keyword in datos["palabras_clave"]:
+            mapeo_palabras[keyword] = categoria
+            
+    # TheFuzz compara el mensaje del cliente contra TODAS las palabras clave
+    opciones = list(mapeo_palabras.keys())
+    coincidencia, puntaje = process.extractOne(texto, opciones)
     
-    # TheFuzz compara el texto del usuario con nuestras intenciones y le da una calificación (0 a 100)
-    coincidencia, puntaje = process.extractOne(texto, intenciones)
-    
-    # Si la similitud es del 70% o más (Entiende "orarios", "prezios", "uvicacion", etc.)
-    if puntaje >= 70:
-        # Extraemos la respuesta exacta desde tu archivo respuestas.py
-        try:
-            return respuestas.MENSAJES[coincidencia]
-        except AttributeError:
-            return f"Entendí que buscas información sobre '{coincidencia}', pero me falta conectar esa respuesta en mi sistema."
+    # Si la coincidencia es buena (75% o más de similitud)
+    import random
+    if puntaje >= 75:
+        categoria_encontrada = mapeo_palabras[coincidencia]
+        datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
+        
+        texto_elegido = random.choice(datos_categoria["textos"])
+        # Tomamos el primer enlace de la lista de links
+        imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
+        
+        return texto_elegido, imagen_elegida
 
-    # 4. MENSAJE POR DEFECTO
-    return "No estoy muy segura de entender. 😅 ¿Podrías intentar con palabras clave como 'Horarios', 'Costos' o pedir hablar con un 'Asesor'?"
-
+    # 4. MENSAJE POR DEFECTO (Fallback)
+    return respuestas.MENSAJES["no_entiendo"], None
 # ==========================================
 # 🌐 CONEXIÓN OMNICANAL (WEBHOOK)
 # ==========================================
@@ -140,9 +147,9 @@ def webhook():
                             if telefono.startswith("521") and len(telefono) == 13:
                                 telefono = telefono.replace("521", "52", 1)
                             
-                            # Procesamos y ENVIAMOS respuesta
-                            respuesta = procesar_mensaje(telefono, texto)
-                            enviar_mensaje_wa(telefono, respuesta)
+                            # Procesamos y ENVIAMOS respuesta (Atrapando texto e imagen)
+                            respuesta_texto, url_img = procesar_mensaje(telefono, texto)
+                            enviar_mensaje_wa(telefono, respuesta_texto, url_img)
                             
                 # 🔵🟣 CASO 2: Messenger / Instagram
                 elif "messaging" in entry:
@@ -151,7 +158,10 @@ def webhook():
                         texto = mensaje_data["message"]["text"]
                         sender_id = mensaje_data["sender"]["id"]
                         
-                        procesar_mensaje(sender_id, texto)
+                        # Atrapamos respuesta, pero en Messenger enviamos texto por ahora
+                        # (La función de IG/FB aún necesita ajuste para imágenes)
+                        respuesta_texto, url_img = procesar_mensaje(sender_id, texto)
+                        enviar_mensaje_messenger(sender_id, respuesta_texto)
                         
         except Exception as e:
             print(f"Error procesando mensaje: {e}") 
