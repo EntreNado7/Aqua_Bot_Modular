@@ -75,19 +75,30 @@ def procesar_mensaje(identificador, texto):
     cliente_id = notion_api.verificar_cliente(identificador)
     if not cliente_id:
         notion_api.registrar_lead(identificador)
-        return "¡Hola! Soy Aqua 💧, el asistente virtual de Acuática. Parece que eres nuevo por aquí. ¿En qué te puedo ayudar hoy?"
+        return "¡Hola! Soy Aqua 💧, el asistente virtual de Acuática. Parece que eres nuevo por aquí. ¿En qué te puedo ayudar hoy? (Ej. Horarios, Costos, Ubicación)"
 
     # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto:
         notion_api.solicitar_humano(cliente_id)
         return "¡Claro! He notificado a uno de nuestros asesores. Te contactarán lo más pronto posible."
 
-    # 3. FILTRO DE EDAD 
-    if re.search(r'\b([1-5])\s*(año|ano|añito)', texto):
-        return "Notamos que buscas clases para un peque de 1 a 5 años. Para esa edad, requerimos que un adulto ingrese a la alberca con ellos. ¿Te gustaría ver los horarios para estas clases?"
+    # 3. INTELIGENCIA CONVERSACIONAL (TheFuzz)
+    # Lista de "intenciones" que Aqua sabe reconocer
+    intenciones = ["horarios", "costos", "ubicacion", "promociones", "requisitos"]
+    
+    # TheFuzz compara el texto del usuario con nuestras intenciones y le da una calificación (0 a 100)
+    coincidencia, puntaje = process.extractOne(texto, intenciones)
+    
+    # Si la similitud es del 70% o más (Entiende "orarios", "prezios", "uvicacion", etc.)
+    if puntaje >= 70:
+        # Extraemos la respuesta exacta desde tu archivo respuestas.py
+        try:
+            return respuestas.MENSAJES[coincidencia]
+        except AttributeError:
+            return f"Entendí que buscas información sobre '{coincidencia}', pero me falta conectar esa respuesta en mi sistema."
 
     # 4. MENSAJE POR DEFECTO
-    return f"Recibí tu mensaje: '{texto}'. Sigo aprendiendo, pero muy pronto podré darte más información."
+    return "No estoy muy segura de entender. 😅 ¿Podrías intentar con palabras clave como 'Horarios', 'Costos' o pedir hablar con un 'Asesor'?"
 
 # ==========================================
 # 🌐 CONEXIÓN OMNICANAL (WEBHOOK)
