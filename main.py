@@ -107,7 +107,8 @@ def procesar_mensaje(identificador, texto):
     
     # Si la coincidencia es buena (75% o más de similitud)
     import random
-    if puntaje >= 75:
+   print(f"Palabra detectada: {coincidencia} | Puntuación: {puntaje}")
+    if puntaje >= 65:
         categoria_encontrada = mapeo_palabras[coincidencia]
         datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
         
