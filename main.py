@@ -1,6 +1,6 @@
 # ==========================================
 # ARCHIVO: main.py
-# FUNCIÓN: Motor principal omnicanal (WhatsApp, FB Messenger, Instagram).
+# FUNCIÓN: Motor principal omnicanal. Recibe, procesa y RESPONDE.
 # ==========================================
 
 import os
@@ -17,24 +17,51 @@ import menu_imagenes
 
 app = Flask(__name__)
 
-# Tokens de Meta (Se guardarán en Render)
+# Tokens de Meta (Guardados en Render)
 WHATSAPP_TOKEN = os.getenv("WHATSAPP_TOKEN")
 VERIFY_TOKEN = os.getenv("VERIFY_TOKEN")
 PHONE_NUMBER_ID = os.getenv("PHONE_NUMBER_ID")
-PAGE_TOKEN = os.getenv("PAGE_TOKEN") # Token futuro para responder en FB/IG
+PAGE_TOKEN = os.getenv("PAGE_TOKEN") # Para futuras respuestas en FB/IG
+
+# ==========================================
+# 🗣️ "CUERDAS VOCALES" (Envío a WhatsApp)
+# ==========================================
+def enviar_mensaje_wa(telefono, texto_respuesta):
+    """Toma la respuesta del bot y la dispara hacia el celular del cliente."""
+    url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
+    
+    headers = {
+        "Authorization": f"Bearer {WHATSAPP_TOKEN}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "messaging_product": "whatsapp",
+        "to": telefono,
+        "type": "text",
+        "text": {"body": texto_respuesta}
+    }
+    
+    try:
+        respuesta = requests.post(url, headers=headers, json=payload)
+        if respuesta.status_code == 200:
+            print("Mensaje enviado con éxito a WA.")
+        else:
+            print(f"Error de Meta al enviar: {respuesta.text}")
+    except Exception as e:
+        print(f"Error interno al enviar: {e}")
 
 # ==========================================
 # ⏰ RELOJ INTERNO (Horario Hábil)
 # ==========================================
 def es_horario_habil():
-    """Calcula si la hora actual de México (UTC-6) está dentro del horario de atención."""
     hora_actual = datetime.utcnow() - timedelta(hours=6)
-    dia_semana = hora_actual.weekday() # 0 = Lunes, 5 = Sábado, 6 = Domingo
+    dia_semana = hora_actual.weekday() 
     hora = hora_actual.hour
     
-    if 0 <= dia_semana <= 4: # Lunes a Viernes (7:00 AM - 8:00 PM)
+    if 0 <= dia_semana <= 4:
         return 7 <= hora < 20
-    elif dia_semana == 5: # Sábados (8:00 AM - 2:00 PM)
+    elif dia_semana == 5:
         return 8 <= hora < 14
     return False
 
@@ -48,30 +75,19 @@ def procesar_mensaje(identificador, texto):
     cliente_id = notion_api.verificar_cliente(identificador)
     if not cliente_id:
         notion_api.registrar_lead(identificador)
-        return "Bienvenida enviada"
+        return "¡Hola! Soy Aqua 💧, el asistente virtual de Acuática. Parece que eres nuevo por aquí. ¿En qué te puedo ayudar hoy?"
 
     # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto:
         notion_api.solicitar_humano(cliente_id)
-        return "Traspaso procesado"
+        return "¡Claro! He notificado a uno de nuestros asesores. Te contactarán lo más pronto posible."
 
-    # 3. FILTRO DE EDAD (REGLA MENORES DE 6 AÑOS)
+    # 3. FILTRO DE EDAD 
     if re.search(r'\b([1-5])\s*(año|ano|añito)', texto):
-        return "Filtro de edad aplicado"
+        return "Notamos que buscas clases para un peque de 1 a 5 años. Para esa edad, requerimos que un adulto ingrese a la alberca con ellos. ¿Te gustaría ver los horarios para estas clases?"
 
-    # 4. BUSCADOR INTELIGENTE EN EL CATÁLOGO (FUZZY MATCHING)
-    todas_palabras = []
-    for key, data in menu_imagenes.CATALOGO_IMAGENES.items():
-        todas_palabras.extend(data["palabras_clave"])
-    
-    mejor_coincidencia = process.extractOne(texto, todas_palabras)
-    
-    if mejor_coincidencia and mejor_coincidencia[1] >= 85:
-        palabra_encontrada = mejor_coincidencia[0]
-        return f"Catálogo enviado por coincidencia con: {palabra_encontrada}"
-        
-    # 5. MENSAJE POR DEFECTO (NO ENTENDIÓ)
-    return "Mensaje no entendido"
+    # 4. MENSAJE POR DEFECTO
+    return f"Recibí tu mensaje: '{texto}'. Sigo aprendiendo, pero muy pronto podré darte más información."
 
 # ==========================================
 # 🌐 CONEXIÓN OMNICANAL (WEBHOOK)
@@ -79,7 +95,6 @@ def procesar_mensaje(identificador, texto):
 @app.route("/webhook", methods=["GET", "POST"])
 def webhook():
     if request.method == "GET":
-        # Meta verifica que somos nosotros (Funciona igual para las 3 redes)
         if request.args.get("hub.verify_token") == VERIFY_TOKEN:
             return request.args.get("hub.challenge")
         return "Token de verificación inválido", 403
@@ -89,7 +104,7 @@ def webhook():
         try:
             for entry in datos.get("entry", []):
                 
-                # 🟢 CASO 1: Es un paquete de WhatsApp
+                # 🟢 CASO 1: WhatsApp
                 if "changes" in entry:
                     cambios = entry["changes"][0]["value"]
                     if "messages" in cambios:
@@ -97,14 +112,19 @@ def webhook():
                         if "text" in mensaje_data:
                             texto = mensaje_data["text"]["body"]
                             telefono = cambios["contacts"][0]["wa_id"]
-                            procesar_mensaje(telefono, texto)
                             
-                # 🔵🟣 CASO 2: Es un paquete de Facebook Messenger o Instagram
+                            # Procesamos y ENVIAMOS respuesta
+                            respuesta = procesar_mensaje(telefono, texto)
+                            enviar_mensaje_wa(telefono, respuesta)
+                            
+                # 🔵🟣 CASO 2: Messenger / Instagram (Aún mudos)
                 elif "messaging" in entry:
                     mensaje_data = entry["messaging"][0]
                     if "message" in mensaje_data and "text" in mensaje_data["message"]:
                         texto = mensaje_data["message"]["text"]
                         sender_id = mensaje_data["sender"]["id"]
+                        
+                        # Solo procesamos y guardamos en Notion por ahora
                         procesar_mensaje(sender_id, texto)
                         
         except Exception as e:
