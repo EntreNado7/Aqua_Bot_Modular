@@ -8,9 +8,9 @@ CATALOGO_IMAGENES = {
         "links": ["https://i.postimg.cc/vT1Kg2Vs/Inscripcion-2026.png"],
         "palabras_clave": ["inscripcion", "inscribirme", "registrarme", "registro", "requisitos", "unirme"],
         "textos": [
-            """¡Invita a alguien más y aprovechen juntos! 🎉\nTenemos tres modalidades de inscripción para que elijas la que más te convenga:\n👤 Individual.\n👥 Dos personas con descuento.\n👨‍👩‍👧‍👦 Tres o más personas con un precio preferencial por integrante.\nRevisa los detalles en la imagen. 💙""",
-            """Cada persona aprende a su ritmo… ¡y también puede hacerlo acompañada! 💙\nPor eso ofrecemos:\n✨ Inscripción individual.\n✨ Beneficio especial para dos personas.\n✨ El mejor costo por persona para grupos de tres o más.\nConsulta la información completa en la imagen. 👇""",
-            """¡Qué gusto que estés aquí! 😊\nPensamos en diferentes formas para que puedas unirte:\n✨ Inscripción individual.\n👥 Descuento especial para dos personas.\n🎉 Y un mejor precio por persona cuando se inscriben tres o más.\nRevisa los costos en la imagen y elige la opción que mejor se adapte a ti. 💙"""
+            """¡Invita a alguien más y aprovechen juntos! 🎉\nTenemos tres modalidades de inscripción para que elijas la que más te convenga (Es un pago único, pregunta a un asesor por los beneficios que te brinda):\n👤 Individual.\n👥 Dos personas con descuento.\n👨‍👩‍👧‍👦 Tres o más personas con un precio preferencial por integrante.\nRevisa los detalles en la imagen. 💙""",
+            """Cada persona aprende a su ritmo… ¡y también puede hacerlo acompañada! 💙\nPor eso ofrecemos:\n✨ Inscripción individual.\n✨ Beneficio especial para dos personas.\n✨ El mejor costo por persona para grupos de tres o más (Es un pago único, pregunta a un asesor por los beneficios que te brinda).\nConsulta la información completa en la imagen. 👇""",
+            """¡Qué gusto que estés aquí! 😊\nPensamos en diferentes formas para que puedas unirte:\n✨ Inscripción individual.\n👥 Descuento especial para dos personas.\n🎉 Y un mejor precio por persona cuando se inscriben tres o más (Es un pago único, pregunta a un asesor por los beneficios que te brinda).\nRevisa los costos en la imagen y elige la opción que mejor se adapte a ti. 💙"""
         ]
     },
     
