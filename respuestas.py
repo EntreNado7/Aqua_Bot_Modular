@@ -12,9 +12,8 @@ import urllib.parse
 texto_url = urllib.parse.quote(TEXTO_PRELLENADO)
 LINK_RECEPCION = f"https://wa.me/{NUMERO_RECEPCION}?text={texto_url}"
 
-# 2. Diccionario de Mensajes Principales
 MENSAJES = {
-    # Saludos
+    # --- TUS MENSAJES ORIGINALES ---
     "bienvenida_nueva": "¡Hola! 👋 Soy Aqua, el Asistente Digital del Club Deportivo EntreNado. Veo que es la primera vez que nos escribes, ¡bienvenida(o)! 🌊\n\n¿En qué te puedo ayudar hoy? Elige una opción o escríbeme tu duda:",
     "bienvenida_recurrente": "¡Hola de nuevo, {nombre}! 🌊 Qué gusto saludarte.\n\n¿En qué te puedo apoyar el día de hoy?",
     
@@ -31,7 +30,14 @@ MENSAJES = {
     "traspaso_fuera_horario": f"📝 He notificado a nuestra recepción sobre tu solicitud.\n\nTen en cuenta que el horario de respuesta de nuestros asesores es de *Lunes a Viernes de 7:00 AM a 8:00 PM y Sábados de 8:00 AM a 2:00 PM*.\n\nPara agilizar tu atención, da clic en el siguiente enlace y déjales un mensaje. Te responderán por ese medio en cuanto inicie su turno:\n👉 {LINK_RECEPCION}",
     
     # Fallback (Cuando el bot no entiende)
-    "no_entiendo": "Disculpa, no logré comprender tu mensaje. 💧 Recuerda que soy un asistente virtual en entrenamiento. ¿Podrías intentar elegir una de las opciones del menú o pedir hablar con un asesor?"
+    "no_entiendo": "Disculpa, no logré comprender tu mensaje. 💧 Recuerda que soy un asistente virtual en entrenamiento. ¿Podrías intentar elegir una de las opciones del menú o pedir hablar con un asesor?",
+
+    # --- NUEVAS RESPUESTAS (Para la inteligencia de TheFuzz) ---
+    "horarios": "Nuestros horarios de clases son de Lunes a Viernes de 7:00 am a 8:00 pm, y Sábados de 8:00 am a 2:00 pm. 🕒",
+    "costos": "Contamos con mensualidades desde $800 MXN. ¡Pregunta por nuestro paquete familiar! 🏊‍♂️💵",
+    "ubicacion": "Nos encontramos en Cuernavaca, Morelos. ¡Te esperamos en nuestras instalaciones! 📍",
+    "promociones": "🎁 Actualmente tenemos inscripción GRATIS en tu primer mes. ¡Aprovéchalo!",
+    "requisitos": "Solo necesitas traje de baño, gorra, goggles y muchas ganas de aprender. 🥽"
 }
 
 # 3. Firma Dinámica (Pie de mensaje para retención)
