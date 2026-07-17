@@ -6,6 +6,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+from datetime import datetime  # <-- Agrega esta línea nueva
 
 # Cargamos las llaves secretas de forma segura
 load_dotenv()
@@ -47,15 +48,27 @@ def verificar_cliente(telefono):
 
 def registrar_lead(telefono, canal="WhatsApp", interes="General"):
     """
-    Crea una nueva fila en Notion para un cliente que nos escribe por primera vez.
+    Crea una nueva fila en Notion llenando todas las columnas.
     """
     url = "https://api.notion.com/v1/pages"
+    
+    # Obtenemos la fecha actual para la columna Fecha
+    fecha_actual = datetime.utcnow().isoformat()
     
     payload = {
         "parent": {"database_id": DATABASE_ID},
         "properties": {
             "Telefono": {
-                "title": [{"text": {"content": telefono}}] # Corregido al tipo Title
+                "title": [{"text": {"content": telefono}}]
+            },
+            "Fecha": {
+                "date": {"start": fecha_actual}
+            },
+            "ulitmo_mensaje": {  # Escrito exactamente como en tu tabla
+                "rich_text": [{"text": {"content": "Primer contacto"}}]
+            },
+            "Perfil_WA_FB_IG": {
+                "rich_text": [{"text": {"content": "Usuario Nuevo"}}]
             },
             "Canal": {
                 "rich_text": [{"text": {"content": canal}}]
@@ -63,15 +76,18 @@ def registrar_lead(telefono, canal="WhatsApp", interes="General"):
             "Interes": {
                 "rich_text": [{"text": {"content": interes}}]
             },
-            "Estado_Atencion": { # Corregido al nombre exacto de tu columna
+            "Estado_Atencion": { 
                 "rich_text": [{"text": {"content": "🟢 Automático"}}] 
+            },
+            "Solicitud_Pendiente": {
+                "rich_text": [{"text": {"content": "Ninguna"}}]
             }
         }
     }
     
     try:
         requests.post(url, headers=HEADERS, json=payload)
-        print(f"Lead {telefono} registrado exitosamente.")
+        print(f"Lead {telefono} registrado con todas las columnas.")
     except Exception as e:
         print(f"Error al registrar lead: {e}")
 
