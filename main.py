@@ -21,7 +21,7 @@ app = Flask(__name__)
 WHATSAPP_TOKEN = os.getenv("WHATSAPP_TOKEN")
 VERIFY_TOKEN = os.getenv("VERIFY_TOKEN")
 PHONE_NUMBER_ID = os.getenv("PHONE_NUMBER_ID")
-PAGE_TOKEN = os.getenv("PAGE_TOKEN") # Para futuras respuestas en FB/IG
+PAGE_TOKEN = os.getenv("PAGE_TOKEN") 
 
 # ==========================================
 # 🗣️ "CUERDAS VOCALES" (Envío a WhatsApp)
@@ -113,18 +113,21 @@ def webhook():
                             texto = mensaje_data["text"]["body"]
                             telefono = cambios["contacts"][0]["wa_id"]
                             
+                            # 🇲🇽 PARCHE PARA MÉXICO: Quitar el '1' de los números 521...
+                            if telefono.startswith("521") and len(telefono) == 13:
+                                telefono = telefono.replace("521", "52", 1)
+                            
                             # Procesamos y ENVIAMOS respuesta
                             respuesta = procesar_mensaje(telefono, texto)
                             enviar_mensaje_wa(telefono, respuesta)
                             
-                # 🔵🟣 CASO 2: Messenger / Instagram (Aún mudos)
+                # 🔵🟣 CASO 2: Messenger / Instagram
                 elif "messaging" in entry:
                     mensaje_data = entry["messaging"][0]
                     if "message" in mensaje_data and "text" in mensaje_data["message"]:
                         texto = mensaje_data["message"]["text"]
                         sender_id = mensaje_data["sender"]["id"]
                         
-                        # Solo procesamos y guardamos en Notion por ahora
                         procesar_mensaje(sender_id, texto)
                         
         except Exception as e:
