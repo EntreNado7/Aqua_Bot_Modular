@@ -23,12 +23,12 @@ def verificar_cliente(telefono):
     Busca si el número de teléfono ya existe en la base de datos de Notion.
     Retorna el ID de la página si existe, o None si es un cliente nuevo.
     """
-    url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
+    url = f"https://api.api.notion.com/v1/databases/{DATABASE_ID}/query"
     
     payload = {
         "filter": {
             "property": "Telefono",
-            "rich_text": {
+            "title": {  # Corregido: Telefono es la columna Title (Aa)
                 "equals": telefono
             }
         }
@@ -39,14 +39,13 @@ def verificar_cliente(telefono):
         data = response.json()
         
         if data.get("results"):
-            # El cliente ya existe, regresamos el ID de su fila
             return data["results"][0]["id"]
         return None
     except Exception as e:
         print(f"Error al verificar cliente en Notion: {e}")
         return None
 
-def registrar_lead(telefono, nombre="Prospecto", interes="General"):
+def registrar_lead(telefono, canal="WhatsApp", interes="General"):
     """
     Crea una nueva fila en Notion para un cliente que nos escribe por primera vez.
     """
@@ -56,16 +55,16 @@ def registrar_lead(telefono, nombre="Prospecto", interes="General"):
         "parent": {"database_id": DATABASE_ID},
         "properties": {
             "Telefono": {
-                "rich_text": [{"text": {"content": telefono}}]
+                "title": [{"text": {"content": telefono}}] # Corregido al tipo Title
             },
-            "Nombre": {
-                "title": [{"text": {"content": nombre}}]
+            "Canal": {
+                "rich_text": [{"text": {"content": canal}}]
             },
             "Interes": {
                 "rich_text": [{"text": {"content": interes}}]
             },
-            "Semaforo": {
-                "select": {"name": "🟢"} # Inicia en verde por defecto
+            "Estado_Atencion": { # Corregido al nombre exacto de tu columna
+                "rich_text": [{"text": {"content": "🟢 Automático"}}] 
             }
         }
     }
@@ -78,20 +77,20 @@ def registrar_lead(telefono, nombre="Prospecto", interes="General"):
 
 def solicitar_humano(page_id):
     """
-    Actualiza la celda del Semáforo a color Amarillo 🟡 cuando piden un asesor.
+    Actualiza la celda del Estado a color Amarillo 🟡 cuando piden un asesor.
     """
     url = f"https://api.notion.com/v1/pages/{page_id}"
     
     payload = {
         "properties": {
-            "Semaforo": {
-                "select": {"name": "🟡"}
+            "Estado_Atencion": { # Corregido al nombre exacto de tu columna
+                "rich_text": [{"text": {"content": "🟡 Requiere Asesor"}}]
             }
         }
     }
     
     try:
         requests.patch(url, headers=HEADERS, json=payload)
-        print("Semáforo actualizado a Amarillo 🟡.")
+        print("Estado actualizado a Amarillo 🟡.")
     except Exception as e:
-        print(f"Error al actualizar semáforo: {e}")
+        print(f"Error al actualizar estado: {e}")
