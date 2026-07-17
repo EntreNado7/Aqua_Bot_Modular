@@ -107,13 +107,9 @@ def webhook():
                         sender_id = mensaje_data["sender"]["id"]
                         procesar_mensaje(sender_id, texto)
                         
-        except Exception as e:
-            print(f"Error procesando mensaje: {e}") # Evita que el servidor colapse si Meta manda un paquete raro
+except Exception as e:
+            print(f"Error procesando mensaje: {e}") 
             
-        return jsonify({"status": "ok"}), 200
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
         return jsonify({"status": "ok"}), 200
 
 if __name__ == "__main__":
