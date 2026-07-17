@@ -107,7 +107,7 @@ def webhook():
                         sender_id = mensaje_data["sender"]["id"]
                         procesar_mensaje(sender_id, texto)
                         
-except Exception as e:
+        except Exception as e:
             print(f"Error procesando mensaje: {e}") 
             
         return jsonify({"status": "ok"}), 200
