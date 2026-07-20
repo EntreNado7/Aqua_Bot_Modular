@@ -155,12 +155,20 @@ def webhook():
         try:
             for entry in datos.get("entry", []):
                 
-                # 🟢 CASO 1: WhatsApp
+               # 🟢 CASO 1: WhatsApp
                 if "changes" in entry:
                     cambios = entry["changes"][0]["value"]
                     if "messages" in cambios:
                         mensaje_data = cambios["messages"][0]
                         if "text" in mensaje_data:
+                            # --- ESCUDO ANTI-DUPLICADOS ---
+                            mensaje_id = mensaje_data.get("id")
+                            if mensaje_id in mensajes_procesados:
+                                print(f"Mensaje {mensaje_id} ya procesado. Ignorando.")
+                                continue # Salta al siguiente sin hacer nada
+                            mensajes_procesados.add(mensaje_id)
+                            # ------------------------------
+                            
                             texto = mensaje_data["text"]["body"]
                             telefono = cambios["contacts"][0]["wa_id"]
                             
