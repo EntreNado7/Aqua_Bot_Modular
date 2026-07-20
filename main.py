@@ -63,6 +63,23 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None):
             print(f"Error de Meta al enviar: {respuesta.text}")
     except Exception as e:
         print(f"Error interno al enviar: {e}")
+
+# ==========================================
+# 🗣️ "CUERDAS VOCALES" (Envío a FB/IG)
+# ==========================================
+def enviar_mensaje_messenger(sender_id, texto_respuesta):
+    """Dispara la respuesta hacia Facebook Messenger o Instagram."""
+    url = f"https://graph.facebook.com/v18.0/me/messages?access_token={PAGE_TOKEN}"
+    headers = {"Content-Type": "application/json"}
+    payload = {
+        "recipient": {"id": sender_id},
+        "message": {"text": texto_respuesta}
+    }
+    try:
+        requests.post(url, headers=headers, json=payload)
+    except Exception as e:
+        print(f"Error interno al enviar a Messenger: {e}")
+
 # ==========================================
 # ⏰ RELOJ INTERNO (Horario Hábil)
 # ==========================================
@@ -105,9 +122,9 @@ def procesar_mensaje(identificador, texto):
     opciones = list(mapeo_palabras.keys())
     coincidencia, puntaje = process.extractOne(texto, opciones)
     
-    # Si la coincidencia es buena (75% o más de similitud)
+    # Si la coincidencia es buena (65% o más de similitud)
     import random
-   print(f"Palabra detectada: {coincidencia} | Puntuación: {puntaje}")
+    print(f"Palabra detectada: {coincidencia} | Puntuación: {puntaje}")
     if puntaje >= 65:
         categoria_encontrada = mapeo_palabras[coincidencia]
         datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
