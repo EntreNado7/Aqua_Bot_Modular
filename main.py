@@ -103,11 +103,14 @@ def es_horario_habil():
 def procesar_mensaje(identificador, texto):
     texto = texto.lower().strip()
     
-    # 1. VERIFICAR CLIENTE EN NOTION
+# 1. VERIFICAR CLIENTE EN NOTION
     cliente_id = notion_api.verificar_cliente(identificador)
     if not cliente_id:
         notion_api.registrar_lead(identificador)
         return respuestas.MENSAJES["bienvenida_nueva"], None
+    else:
+        # El cliente ya existe, actualizamos su registro con el nuevo mensaje
+        notion_api.actualizar_interaccion(cliente_id, texto)
 
     # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto or "recepcion" in texto:
