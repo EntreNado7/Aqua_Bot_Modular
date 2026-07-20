@@ -23,6 +23,9 @@ VERIFY_TOKEN = os.getenv("VERIFY_TOKEN")
 PHONE_NUMBER_ID = os.getenv("PHONE_NUMBER_ID")
 PAGE_TOKEN = os.getenv("PAGE_TOKEN") 
 
+
+PAGE_TOKEN = os.getenv("PAGE_TOKEN") 
+mensajes_procesados = set()  # <-- NUEVA LÍNEA: Libreta de mensajes atendidos
 # ==========================================
 # 🗣️ "CUERDAS VOCALES" (Envío a WhatsApp)
 # ==========================================
