@@ -103,46 +103,72 @@ def es_horario_habil():
 def procesar_mensaje(identificador, texto):
     texto = texto.lower().strip()
     
-# 1. VERIFICAR CLIENTE EN NOTION
+    # 1. VERIFICAR CLIENTE EN NOTION
     cliente_id = notion_api.verificar_cliente(identificador)
     if not cliente_id:
         notion_api.registrar_lead(identificador)
-        return respuestas.MENSAJES["bienvenida_nueva"], None
+        texto_bienvenida = respuestas.MENSAJES["bienvenida_nueva"]
+        # Primer envío de botones (Límite: 3, máx 20 caracteres)
+        mis_botones = ["📍 Ubicación", "🕒 Horarios", "🏊‍♂️ Ver Clases"]
+        return texto_bienvenida, None, mis_botones
     else:
-        # El cliente ya existe, actualizamos su registro con el nuevo mensaje
         notion_api.actualizar_interaccion(cliente_id, texto)
 
     # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto or "recepcion" in texto:
         notion_api.solicitar_humano(cliente_id)
-        return respuestas.MENSAJES["traspaso_horario_habil"], None
+        return respuestas.MENSAJES["traspaso_horario_habil"], None, None
 
-    # 3. INTELIGENCIA CONVERSACIONAL (TheFuzz + Catálogo Visual)
-    # Creamos un mapa relacionando cada palabra clave con su categoría
-    mapeo_palabras = {}
+    # 3. INTERACCIONES DE MENÚ PRINCIPAL (Botones Fijos)
+    if texto in ["📍 ubicación", "ubicación", "ubicacion"]:
+        return respuestas.MENSAJES["ubicacion"], None, None
+    elif texto in ["🕒 horarios", "horarios"]:
+        return respuestas.MENSAJES["horarios"], None, None
+    elif texto in ["🏊‍♂️ ver clases", "ver clases"]:
+        return respuestas.MENSAJES["menu_clases"], None, ["💦 Clases de Agua", "🌍 Clases de Tierra", "🎁 Paquetes Combo"]
+    
+    # 3.1 BIFURCACIONES DEL MENÚ DE AGUA
+    elif texto in ["💦 clases de agua", "clases de agua", "agua"]:
+        return respuestas.MENSAJES["menu_agua"], None, ["🧑 Adultos", "👧 Infantiles", "👶 Bebés"]
+    elif texto in ["🧑 adultos", "adultos"]:
+        return respuestas.MENSAJES["menu_adultos"], None, None
+    elif texto in ["👧 infantiles", "infantiles"]:
+        return respuestas.MENSAJES["menu_infantiles"], None, None
+    elif texto in ["👶 bebés", "bebes"]:
+        desc_texto, desc_botones = respuestas.DESCRIPCIONES["bebes"]
+        return desc_texto, None, desc_botones
+    elif texto in ["🌍 clases de tierra", "clases de tierra", "tierra"]:
+        # Aquí puedes enganchar la info de tierra más adelante
+        return "Nuestras clases de tierra incluyen Yoga, Spinning, GAP, Box... (Próximamente catálogo visual)", None, None
+
+    # 4. FASE DE EXPLORACIÓN: Búsqueda de Descripciones (Texto Libre)
+    opciones_descripciones = list(respuestas.DESCRIPCIONES.keys())
+    coincidencia_desc, puntaje_desc = process.extractOne(texto, opciones_descripciones)
+    if puntaje_desc >= 75:
+        # Extraemos el texto y los botones dinámicos desde el diccionario
+        texto_descripcion, botones_cierre = respuestas.DESCRIPCIONES[coincidencia_desc]
+        return texto_descripcion, None, botones_cierre
+
+    # 5. FASE DE CIERRE: Búsqueda de Imágenes (Por botón o texto de costos)
+    mapeo_imagenes = {}
     for categoria, datos in menu_imagenes.CATALOGO_IMAGENES.items():
         for keyword in datos["palabras_clave"]:
-            mapeo_palabras[keyword] = categoria
+            mapeo_imagenes[keyword] = categoria
             
-    # TheFuzz compara el mensaje del cliente contra TODAS las palabras clave
-    opciones = list(mapeo_palabras.keys())
-    coincidencia, puntaje = process.extractOne(texto, opciones)
+    opciones_img = list(mapeo_imagenes.keys())
+    coincidencia_img, puntaje_img = process.extractOne(texto, opciones_img)
     
-    # Si la coincidencia es buena (65% o más de similitud)
     import random
-    print(f"Palabra detectada: {coincidencia} | Puntuación: {puntaje}")
-    if puntaje >= 65:
-        categoria_encontrada = mapeo_palabras[coincidencia]
+    if puntaje_img >= 65:
+        categoria_encontrada = mapeo_imagenes[coincidencia_img]
         datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
-        
         texto_elegido = random.choice(datos_categoria["textos"])
-        # Tomamos el primer enlace de la lista de links
         imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
         
-        return texto_elegido, imagen_elegida
+        return texto_elegido, imagen_elegida, None
 
-    # 4. MENSAJE POR DEFECTO (Fallback)
-    return respuestas.MENSAJES["no_entiendo"], None
+    # 6. MENSAJE POR DEFECTO (Fallback)
+    return respuestas.MENSAJES["no_entiendo"], None, None
 # ==========================================
 # 🌐 CONEXIÓN OMNICANAL (WEBHOOK)
 # ==========================================
