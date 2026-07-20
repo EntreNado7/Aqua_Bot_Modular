@@ -111,3 +111,32 @@ def solicitar_humano(page_id):
         print("Estado actualizado a Amarillo 🟡.")
     except Exception as e:
         print(f"Error al actualizar estado: {e}")
+
+
+
+def actualizar_interaccion(page_id, texto_mensaje):
+    """
+    Actualiza la fecha y el último mensaje de un cliente recurrente en Notion.
+    """
+    url = f"https://api.notion.com/v1/pages/{page_id}"
+    
+    # Obtenemos la fecha y hora actual
+    from datetime import datetime
+    fecha_actual = datetime.utcnow().isoformat()
+    
+    payload = {
+        "properties": {
+            "Fecha": {
+                "date": {"start": fecha_actual}
+            },
+            "ulitmo_mensaje": {  # Respetando el nombre exacto de tu tabla
+                "rich_text": [{"text": {"content": texto_mensaje[:2000]}}] # Limitamos a 2000 caracteres por seguridad de Notion
+            }
+        }
+    }
+    
+    try:
+        requests.patch(url, headers=HEADERS, json=payload)
+        print(f"Historial actualizado en Notion para el registro: {page_id}")
+    except Exception as e:
+        print(f"Error al actualizar historial en Notion: {e}")
