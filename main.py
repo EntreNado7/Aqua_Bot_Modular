@@ -175,22 +175,32 @@ def procesar_mensaje(identificador, texto):
         mis_botones = ["📍 Ubicación", "🕒 Horarios", "🏊‍♂️ Ver Clases"]
         return texto_bienvenida, None, mis_botones
 
-   # 2. BOTÓN DE ASESOR (HANDOFF)
+# 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto or "recepcion" in texto:
         notion_api.solicitar_humano(cliente_id)
         
-        # 1. Define el número de la recepción de EntreNado
-        numero_recepcion = "5217772596086" 
+        # 1. Obtenemos el historial de Notion
+        historial_bruto = notion_api.obtener_historial(cliente_id)
+        resumen = ""
+        if historial_bruto:
+            # Limpiamos la palabra 'asesor' del final para que el resumen sea sobre las clases
+            camino = historial_bruto.replace(" > asesor", "").replace(" > humano", "")
+            # Tomamos los últimos 100 caracteres para no romper el link
+            resumen = f"\n\n*(Contexto: {camino[-100:]})*"
+            
+        # 2. Define el número de la recepción de EntreNado
+        numero_recepcion = "5217772596086"
         
-        # 2. Creamos el mensaje prellenado
-        mensaje_base = "Hola, estaba interactuando con Aqua y me gustaría hablar con un asesor para continuar con mi atención. 🌊"
+        # 3. Creamos el mensaje prellenado
+        mensaje_base = f"Hola, por favor envía este mensaje para que un asesor continúe con tu atención. 🌊{resumen}"
+        import urllib.parse
         mensaje_codificado = urllib.parse.quote(mensaje_base)
         
-        # 3. Generamos el link dinámico de wa.me
+        # 4. Generamos el link
         link_whatsapp = f"https://wa.me/{numero_recepcion}?text={mensaje_codificado}"
         
-        # 4. Construimos la respuesta final
-        texto_handoff = f"¡Claro que sí! 🙋‍♀️ He notificado a nuestro equipo.\n\nPara continuar tu atención de forma personalizada, por favor haz clic en el siguiente enlace para ir a nuestro chat principal:\n👉 {link_whatsapp}"
+        # 5. Respuesta final con la instrucción clara
+        texto_handoff = f"¡Claro que sí! 🙋‍♀️ He notificado a nuestro equipo.\n\nPara continuar tu atención de forma personalizada, haz clic en el siguiente enlace y *envía el mensaje* que aparecerá en tu pantalla:\n👉 {link_whatsapp}"
         
         return texto_handoff, None, None
 
