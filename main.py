@@ -234,19 +234,20 @@ def procesar_mensaje(identificador, texto):
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["bebes"]
         return desc_texto, None, desc_botones
         
-    # 3.2 BIFURCACIONES DEL MENÚ DE TIERRA
+# 3.2 BIFURCACIONES DEL MENÚ DE TIERRA
     elif texto in ["🌍 clases de tierra", "clases de tierra", "tierra"]:
-        return respuestas.MENSAJES["menu_tierra"], None, None
+        botones_tierra = ["💪 Clases Fitness", "🥊 Box", "🏋️‍♂️ Open Gym"]
+        return respuestas.MENSAJES["menu_tierra"], None, botones_tierra
         
-    elif texto in ["clases fitness", "fitness", "multidisciplina"]:
+    elif texto in ["💪 clases fitness", "clases fitness", "fitness", "multidisciplina"]:
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["clases fitness"]
         return desc_texto, None, desc_botones
         
-    elif texto in ["box", "escuela de box", "boxeo"]:
+    elif texto in ["🥊 box", "box", "escuela de box", "boxeo"]:
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["box"]
         return desc_texto, None, desc_botones
         
-    elif texto in ["open gym", "gym", "gimnasio", "uso libre", "open"]:
+    elif texto in ["🏋️‍♂️ open gym", "open gym", "gym", "gimnasio", "uso libre", "open"]:
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["open gym"]
         return desc_texto, None, desc_botones
 
