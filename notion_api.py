@@ -118,29 +118,59 @@ def solicitar_humano(page_id):
 
 
 
-def actualizar_interaccion(page_id, texto_mensaje):
-    """
-    Actualiza la fecha y el último mensaje de un cliente recurrente en Notion.
-    """
+def obtener_historial(page_id):
+    """Obtiene el historial de interacciones del cliente desde Notion."""
     url = f"https://api.notion.com/v1/pages/{page_id}"
+    try:
+        response = requests.get(url, headers=HEADERS)
+        data = response.json()
+        prop_historial = data.get("properties", {}).get("Historial", {}).get("rich_text", [])
+        if prop_historial:
+            return prop_historial[0].get("plain_text", "")
+        return ""
+    except Exception as e:
+        print(f"Error al obtener historial: {e}")
+        return ""
+
+def obtener_historial(page_id):
+    """Obtiene el historial de interacciones del cliente desde Notion."""
+    url = f"https://api.notion.com/v1/pages/{page_id}"
+    try:
+        response = requests.get(url, headers=HEADERS)
+        data = response.json()
+        prop_historial = data.get("properties", {}).get("Historial", {}).get("rich_text", [])
+        if prop_historial:
+            return prop_historial[0].get("plain_text", "")
+        return ""
+    except Exception as e:
+        print(f"Error al obtener historial: {e}")
+        return ""
+
+def actualizar_interaccion(page_id, texto):
+    """Actualiza el último mensaje y concatena el nuevo clic al Historial."""
+    # 1. Recuperamos la memoria anterior
+    historial_previo = obtener_historial(page_id)
     
-    # Obtenemos la fecha y hora actual
-    from datetime import datetime
-    fecha_actual = datetime.utcnow().isoformat()
-    
+    # 2. Armamos la cadena de clics
+    if historial_previo:
+        nuevo_historial = f"{historial_previo} > {texto}"
+        # Recortamos a los últimos 500 caracteres para no saturar la base de datos
+        nuevo_historial = nuevo_historial[-500:]
+    else:
+        nuevo_historial = texto
+
+    url = f"https://api.notion.com/v1/pages/{page_id}"
     payload = {
         "properties": {
-            "Fecha": {
-                "date": {"start": fecha_actual}
+            "ulitmo_mensaje": { # Escrito exactamente como en tu captura de Notion
+                "rich_text": [{"text": {"content": texto}}]
             },
-            "ulitmo_mensaje": {  # Respetando el nombre exacto de tu tabla
-                "rich_text": [{"text": {"content": texto_mensaje[:2000]}}] # Limitamos a 2000 caracteres por seguridad de Notion
+            "Historial": { # Tu nueva columna
+                "rich_text": [{"text": {"content": nuevo_historial}}]
             }
         }
     }
-    
     try:
         requests.patch(url, headers=HEADERS, json=payload)
-        print(f"Historial actualizado en Notion para el registro: {page_id}")
     except Exception as e:
-        print(f"Error al actualizar historial en Notion: {e}")
+        print(f"Error al actualizar interaccion: {e}")
