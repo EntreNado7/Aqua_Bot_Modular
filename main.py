@@ -198,7 +198,13 @@ def procesar_mensaje(identificador, texto):
     # Agregamos las nuevas palabras clave para detectar el botón modificado
     elif texto in ["👧 infantiles/juv", "infantiles/juv", "infantiles", "juveniles"]:
         return respuestas.MENSAJES["menu_infantiles"], None, None
-        
+
+    # --- NUEVO ATAJO PARA MAMÁ & BEBÉ ---
+    elif texto in ["mamá & bebé", "mama & bebe", "mamá y bebé", "mama y bebe", "mama", "mamá"]:
+        desc_texto, desc_botones = respuestas.DESCRIPCIONES["mama y bebe"]
+        return desc_texto, None, desc_botones
+
+    
     elif texto in ["👶 bebés", "bebes"]:
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["bebes"]
         return desc_texto, None, desc_botones
