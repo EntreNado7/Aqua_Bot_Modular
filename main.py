@@ -157,7 +157,8 @@ def procesar_mensaje(identificador, texto):
         sesion_nueva = True 
 
     # Interceptor de saludos manuales (por si saludan antes de las 12 hrs)
-    saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información"]
+# Interceptor de saludos manuales y comandos de reinicio
+    saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información", "reset", "reiniciar", "inicio"]
     
     if sesion_nueva or texto in saludos_directos:
         hora_local = datetime.now().hour # Toma la hora exacta de Cuernavaca gracias a la variable de Render
