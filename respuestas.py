@@ -25,8 +25,11 @@ MENSAJES = {
     "horarios": "🕒 Nuestras puertas están abiertas para recibirte en los siguientes horarios:\n\n🔸 Lunes a Viernes: 6:00 a 21:00 hrs.\n🔸 Sábados: 7:00 a 14:00 hrs.",
     "menu_clases": "En EntreNado tenemos opciones para todas las edades y objetivos. 💪\nElige qué mundo te gustaría explorar o conoce cómo combinarlos:",
     "menu_agua": "El agua es nuestro elemento. 💙 Tenemos programas especializados para cada etapa.\n¿Para quién buscas información?",
-    "menu_adultos": "¡Excelente! Para adultos contamos con:\n\n🔸 *Grupales:* Clases por niveles para aprender o perfeccionar técnica.\n🔸 *Nado Libre:* Entrena a tu ritmo en carriles exclusivos.\n🔸 *Aquafitness:* Ejercicio funcional de bajo impacto con música.\n🔸 *Rehabilitación:* Terapia acuática personalizada.\n\n✏️ *Por favor, escribe la clase que más te interesa para darte los detalles.*",
-    "menu_infantiles": "¡Los más pequeños son nuestra especialidad! 🐬 Para niños y jóvenes tenemos:\n\n🔸 *Grupales (Escolares):* Aprendizaje por niveles y convivencia.\n🔸 *Personalizadas:* Atención 1 a 1 para un avance a su medida.\n\n✏️ *Por favor, escribe cuál de estas dos opciones te interesa explorar.*"
+    # --- DENTRO DEL DICCIONARIO 'MENSAJES' ---
+
+    "menu_adultos": "¡Excelente! Para adultos contamos con:\n\n🔹 *Grupales:* Clases por niveles para aprender o perfeccionar técnica.\n🔹 *Personalizadas:* Atención 1 a 1 enfocada en tus objetivos.\n🔹 *Mamá & Bebé:* Clase grupal para ti, en compañía de tu pequeño.\n🔹 *Nado Libre:* Entrena a tu ritmo en carriles exclusivos.\n🔹 *Aquafitness:* Ejercicio funcional de bajo impacto con música.\n🔹 *Rehabilitación:* Terapia acuática personalizada.\n\n✏️ *Por favor, escribe la clase que más te interesa para darte los detalles.*",
+    
+    "menu_infantiles": "¡Los más pequeños y jóvenes son nuestra especialidad! 🐬 Para edades de *4 a 17 años* tenemos:\n\n🔹 *Grupales (Escolares):* Aprendizaje por niveles y convivencia.\n🔹 *Personalizadas:* Atención 1 a 1 para un avance a su medida.\n\n✏️ *Por favor, escribe cuál de estas dos opciones te interesa explorar.*",
 }
 
 DESCRIPCIONES = {
@@ -36,7 +39,11 @@ DESCRIPCIONES = {
     
     "nado libre": ("🏊‍♂️ *Nado Libre*\nPerfecto si ya dominas la técnica y buscas un espacio para entrenar a tu propio ritmo. Te asignamos un carril para que disfrutes de tu rutina con total libertad.\n\n¿Te gustaría conocer la inversión o prefieres que un humano te apoye?", ["💲 Costos N. Libre", "🗣️ Asesor"]),
     
-    "grupales adultos": ("🧑 *Clases Grupales para Adultos*\nNunca es tarde para aprender o mejorar. Nuestras clases están divididas por niveles para que avances a tu propio ritmo acompañado de nuestros instructores.\n\n¿Quieres que te envíe los costos o prefieres hablar con un asesor?", ["💲 Costos Adultos", "🗣️ Asesor"]),
+    # --- DENTRO DEL DICCIONARIO 'DESCRIPCIONES' (Agrega estas dos nuevas) ---
+
+    "personalizadas adultos": ("⭐ *Clases Personalizadas para Adultos*\nAtención exclusiva 1 a 1. Ideal para superar el miedo al agua, entrenar para un evento específico o avanzar a tu propio ritmo con un instructor dedicado 100% a ti.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Personal", "🗣️ Asesor"]),
+    
+    "mama y bebe": ("👩‍👦 *Mamá & Bebé (Clase Grupal)*\n¡Un espacio diseñado para ti, mamá! En esta clase grupal tú eres la alumna principal. Te ejercitarás, convivirás con otras mamás y disfrutarás del agua mientras tu bebé te acompaña en esta hermosa etapa de conexión.\n\n¿Te comparto la imagen con los costos o prefieres hablar con un asesor?", ["💲 Costos Mamá Bebé", "🗣️ Asesor"]),
     
     "rehabilitacion": ("🩹 *Rehabilitación Acuática*\nAtención especializada y gentil para tu cuerpo. Usamos las propiedades del agua para ayudarte en tu proceso de recuperación física, aliviando el dolor y mejorando tu movilidad de forma segura.\n\n¿Te comparto los costos o te comunico con recepción?", ["💲 Costos Rehab", "🗣️ Asesor"]),
     
