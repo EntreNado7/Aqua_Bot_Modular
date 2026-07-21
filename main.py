@@ -9,6 +9,7 @@ import requests
 from datetime import datetime, timedelta
 from flask import Flask, request, jsonify
 from thefuzz import process
+import urllib.parse
 
 # 📦 Importamos nuestros propios módulos
 import respuestas
@@ -174,10 +175,24 @@ def procesar_mensaje(identificador, texto):
         mis_botones = ["📍 Ubicación", "🕒 Horarios", "🏊‍♂️ Ver Clases"]
         return texto_bienvenida, None, mis_botones
 
-    # 2. BOTÓN DE ASESOR (HANDOFF)
+   # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto or "recepcion" in texto:
         notion_api.solicitar_humano(cliente_id)
-        return respuestas.MENSAJES["traspaso_horario_habil"], None, None
+        
+        # 1. Define el número de la recepción de EntreNado
+        numero_recepcion = "5217772596086" 
+        
+        # 2. Creamos el mensaje prellenado
+        mensaje_base = "Hola, estaba interactuando con Aqua y me gustaría hablar con un asesor para continuar con mi atención. 🌊"
+        mensaje_codificado = urllib.parse.quote(mensaje_base)
+        
+        # 3. Generamos el link dinámico de wa.me
+        link_whatsapp = f"https://wa.me/{numero_recepcion}?text={mensaje_codificado}"
+        
+        # 4. Construimos la respuesta final
+        texto_handoff = f"¡Claro que sí! 🙋‍♀️ He notificado a nuestro equipo.\n\nPara continuar tu atención de forma personalizada, por favor haz clic en el siguiente enlace para ir a nuestro chat principal:\n👉 {link_whatsapp}"
+        
+        return texto_handoff, None, None
 
     # 3. INTERACCIONES DE MENÚ PRINCIPAL (Botones Fijos)
     if texto in ["📍 ubicación", "ubicación", "ubicacion"]:
