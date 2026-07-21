@@ -186,16 +186,22 @@ def procesar_mensaje(identificador, texto):
     elif texto in ["🏊‍♂️ ver clases", "ver clases"]:
         return respuestas.MENSAJES["menu_clases"], None, ["💦 Clases de Agua", "🌍 Clases de Tierra", "🎁 Paquetes Combo"]
     
-    # 3.1 BIFURCACIONES DEL MENÚ DE AGUA
+# 3.1 BIFURCACIONES DEL MENÚ DE AGUA
     elif texto in ["💦 clases de agua", "clases de agua", "agua"]:
-        return respuestas.MENSAJES["menu_agua"], None, ["🧑 Adultos", "👧 Infantiles", "👶 Bebés"]
+        # Aquí actualizamos el nombre del botón
+        return respuestas.MENSAJES["menu_agua"], None, ["🧑 Adultos", "👧 Infantiles/Juv", "👶 Bebés"]
+        
     elif texto in ["🧑 adultos", "adultos"]:
         return respuestas.MENSAJES["menu_adultos"], None, None
-    elif texto in ["👧 infantiles", "infantiles"]:
+        
+    # Agregamos las nuevas palabras clave para detectar el botón modificado
+    elif texto in ["👧 infantiles/juv", "infantiles/juv", "infantiles", "juveniles"]:
         return respuestas.MENSAJES["menu_infantiles"], None, None
+        
     elif texto in ["👶 bebés", "bebes"]:
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["bebes"]
         return desc_texto, None, desc_botones
+        
     elif texto in ["🌍 clases de tierra", "clases de tierra", "tierra"]:
         # Aquí puedes enganchar la info de tierra más adelante
         return "Nuestras clases de tierra incluyen Yoga, Spinning, GAP, Box... (Próximamente catálogo visual)", None, None
