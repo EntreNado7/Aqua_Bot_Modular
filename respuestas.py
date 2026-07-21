@@ -56,6 +56,21 @@ DESCRIPCIONES = {
     "box": ("🥊 *Box (Especialidad)*\n¡Libera la tensión, gana agilidad y mejora tu condición física al máximo! Nuestro entrenamiento exclusivo de Box te enseñará técnica de golpeo, combinaciones y desplazamientos en sesiones de alta intensidad.\n\n👦👧 *¡Apto a partir de los 6 años!* Es ideal tanto para niños y jóvenes que buscan canalizar su energía y ganar disciplina, como para adultos que desean un entrenamiento explosivo.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Box", "🗣️ Asesor"]),
 
     "open gym": ("🏋️‍♂️ *Open Gym*\nPara quienes ya tienen su propia rutina y solo necesitan el espacio adecuado. Disfruta del uso libre de nuestras instalaciones y equipo para entrenar a tu propio ritmo y bajo tus propias reglas.\n\n⚠️ _Nota importante:_ Esta modalidad es de entrenamiento autónomo (sin supervisión de un instructor) y aplica únicamente dentro de horarios específicos preestablecidos.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Open Gym", "🗣️ Asesor"]),
+    "spinning": ("🚴 *Spinning*\n¡Sube la energía y quema calorías al máximo! Una clase de cardio intenso sobre bicicleta estacionaria, guiada por el ritmo de la música. Ideal para fortalecer tus piernas, mejorar tu resistencia cardiovascular y liberar estrés.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "yoga": ("🧘 *Yoga*\nEncuentra el equilibrio perfecto entre cuerpo y mente. A través de posturas guiadas y control de la respiración, mejorarás tu flexibilidad, fuerza, postura y lograrás una relajación profunda. Ideal para todos los niveles.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "gap": ("🍑 *GAP (Glúteo, Abdomen y Pierna)*\nUn entrenamiento enfocado y directo al grano. Esta clase está diseñada específicamente para tonificar, fortalecer y definir tu tren inferior y tu zona core a través de ejercicios muy localizados.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "funcional": ("💪 *Entrenamiento Funcional*\nPrepara tu cuerpo para el día a día. Utilizando tu propio peso y herramientas dinámicas, realizarás ejercicios que involucran varios grupos musculares al mismo tiempo. Ganarás fuerza, resistencia, velocidad y coordinación.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "fitdance": ("💃 *FitDance*\n¡Hacer ejercicio nunca fue tan divertido! Una clase llena de ritmo donde quemarás calorías mientras bailas coreografías dinámicas y fáciles de seguir. No necesitas saber bailar, ¡solo tener ganas de moverte y sudar!\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "senior health": ("👵 *Senior's Health*\nMovimiento seguro y diseñado especialmente para adultos mayores. Una clase de bajo impacto enfocada en mantener y mejorar la movilidad articular, la fuerza, el equilibrio y la calidad de vida, todo en un ambiente cuidadoso y adaptado.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "full power": ("⚡ *Full Power*\n¡Lleva tu cuerpo al siguiente nivel! Un entrenamiento explosivo de alta intensidad diseñado para aquellos que buscan superar sus límites. Desarrollarás máxima fuerza, potencia y resistencia muscular en una sesión retadora.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "optimove": ("🔄 *Optimove*\nEntrena con inteligencia. Una clase enfocada en la biomecánica, la corrección postural y la movilidad articular. Ideal para recuperarte activamente, prevenir lesiones y optimizar la forma en que tu cuerpo se mueve todos los días.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
 }
 # 3. Firma Dinámica (Pie de mensaje para retención)
 FIRMA_DINAMICA = "\n\n¿Te puedo ayudar con algo más? 👇"
