@@ -29,8 +29,8 @@ mensajes_procesados = set()  # <-- NUEVA LÍNEA: Libreta de mensajes atendidos
 # ==========================================
 # 🗣️ "CUERDAS VOCALES" (Envío a WhatsApp)
 # ==========================================
-def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None):
-    """Envía un mensaje de texto, o una imagen con texto adjunto (caption)."""
+def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None, botones=None):
+    """Envía texto, imagen o botones interactivos."""
     url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
     
     headers = {
@@ -38,8 +38,31 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None):
         "Content-Type": "application/json"
     }
     
-    # Si la función recibe una URL de imagen, arma un paquete multimedia
-    if url_imagen:
+    # 1️⃣ CASO: Enviar Botones Interactivos
+    if botones:
+        lista_botones = []
+        for i, titulo in enumerate(botones):
+            lista_botones.append({
+                "type": "reply",
+                "reply": {
+                    "id": f"btn_{i}",
+                    "title": titulo[:20] # Límite estricto de Meta
+                }
+            })
+            
+        payload = {
+            "messaging_product": "whatsapp",
+            "to": telefono,
+            "type": "interactive",
+            "interactive": {
+                "type": "button",
+                "body": {"text": texto_respuesta},
+                "action": {"buttons": lista_botones}
+            }
+        }
+        
+    # 2️⃣ CASO: Enviar Imagen con Texto
+    elif url_imagen:
         payload = {
             "messaging_product": "whatsapp",
             "to": telefono,
@@ -49,7 +72,8 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None):
                 "caption": texto_respuesta
             }
         }
-    # Si no hay imagen, manda texto normal
+        
+    # 3️⃣ CASO: Enviar Texto Plano
     else:
         payload = {
             "messaging_product": "whatsapp",
