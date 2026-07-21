@@ -30,6 +30,7 @@ MENSAJES = {
     "menu_adultos": "¡Excelente! Para adultos contamos con:\n\n🔹 *Grupales:* Clases por niveles para aprender o perfeccionar técnica.\n🔹 *Personalizadas:* Atención 1 a 1 enfocada en tus objetivos.\n🔹 *Mamá & Bebé:* Clase grupal para ti, en compañía de tu pequeño.\n🔹 *Nado Libre:* Entrena a tu ritmo en carriles exclusivos.\n🔹 *Aquafitness:* Ejercicio funcional de bajo impacto con música.\n🔹 *Rehabilitación:* Terapia acuática personalizada.\n\n✏️ *Por favor, escribe la clase que más te interesa para darte los detalles.*",
     
     "menu_infantiles": "¡Los más pequeños y jóvenes son nuestra especialidad! 🐬 Para edades de *4 a 17 años* tenemos:\n\n🔹 *Grupales (Escolares):* Aprendizaje por niveles y convivencia.\n🔹 *Personalizadas:* Atención 1 a 1 para un avance a su medida.\n\n✏️ *Por favor, escribe cuál de estas dos opciones te interesa explorar.*",
+    "menu_tierra": "¡Excelente! Para entrenar en piso contamos con tres modalidades principales:\n\n🔹 *Clases Fitness (Multidisciplina):* Paquete flexible para combinar Yoga, Spinning, Funcional, GAP, entre otras.\n🔹 *Box (Especialidad):* Entrenamiento exclusivo enfocado en técnica y combate (¡A partir de los 6 años!).\n🔹 *Open Gym:* Uso libre de nuestras instalaciones para entrenar a tu propio ritmo.\n\n✏️ *Por favor, escribe la opción que te interesa para darte los detalles.*",
 }
 
 DESCRIPCIONES = {
@@ -50,6 +51,11 @@ DESCRIPCIONES = {
     "grupales infantiles": ("🐬 *Grupales Infantiles (Escolares)*\nGrupos organizados por niveles donde los niños aprenden a nadar de forma divertida y segura. Fomentamos la disciplina, la técnica y el compañerismo.\n\n¿Te envío la imagen con las mensualidades o prefieres hablar con un asesor?", ["💲 Costos Infantiles", "🗣️ Asesor"]),
     
     "personalizadas infantiles": ("⭐ *Clases Infantiles Personalizadas*\nAtención 100% enfocada en tu hijo. Ideal para niños que necesitan superar el miedo al agua, requieren atención especial, o buscan un avance técnico mucho más acelerado.\n\n¿Te gustaría ver los precios o prefieres hablar con recepción?", ["💲 Costos Infantiles", "🗣️ Asesor"])
+    "clases fitness": ("💪 *Clases Fitness (Multidisciplina)*\nContamos con 8 disciplinas diseñadas para fortalecer tu cuerpo y mejorar tu condición física:\n_Spinning, Yoga, GAP, Entrenamiento Funcional, FitDance, Senior's Health, Full Power y Optimove._\n\n¿Te gustaría ver nuestra tabla de costos y descubrir cómo puedes combinarlas, o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+
+    "box": ("🥊 *Box (Especialidad)*\n¡Libera la tensión, gana agilidad y mejora tu condición física al máximo! Nuestro entrenamiento exclusivo de Box te enseñará técnica de golpeo, combinaciones y desplazamientos en sesiones de alta intensidad.\n\n👦👧 *¡Apto a partir de los 6 años!* Es ideal tanto para niños y jóvenes que buscan canalizar su energía y ganar disciplina, como para adultos que desean un entrenamiento explosivo.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Box", "🗣️ Asesor"]),
+
+    "open gym": ("🏋️‍♂️ *Open Gym*\nPara quienes ya tienen su propia rutina y solo necesitan el espacio adecuado. Disfruta del uso libre de nuestras instalaciones y equipo para entrenar a tu propio ritmo y bajo tus propias reglas.\n\n⚠️ _Nota importante:_ Esta modalidad es de entrenamiento autónomo (sin supervisión de un instructor) y aplica únicamente dentro de horarios específicos preestablecidos.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Open Gym", "🗣️ Asesor"]),
 }
 # 3. Firma Dinámica (Pie de mensaje para retención)
 FIRMA_DINAMICA = "\n\n¿Te puedo ayudar con algo más? 👇"
