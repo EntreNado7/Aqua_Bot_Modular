@@ -251,33 +251,51 @@ def procesar_mensaje(identificador, texto):
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["open gym"]
         return desc_texto, None, desc_botones
 
-    # 4. FASE DE EXPLORACIÓN: Búsqueda de Descripciones (Texto Libre)
+   # 4. FASE DE CIERRE PRIORITARIO (Si detectamos que el usuario quiere precios)
+    if "costo" in texto or "precio" in texto or "💲" in texto or "mensualidad" in texto:
+        mapeo_imagenes = {}
+        for categoria, datos in menu_imagenes.CATALOGO_IMAGENES.items():
+            for keyword in datos["palabras_clave"]:
+                mapeo_imagenes[keyword] = categoria
+                
+        opciones_img = list(mapeo_imagenes.keys())
+        coincidencia_img, puntaje_img = process.extractOne(texto, opciones_img)
+        
+        if puntaje_img >= 65:
+            import random
+            categoria_encontrada = mapeo_imagenes[coincidencia_img]
+            datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
+            texto_elegido = random.choice(datos_categoria["textos"])
+            imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
+            return texto_elegido, imagen_elegida, None
+
+    # 5. FASE DE EXPLORACIÓN: Búsqueda de Descripciones (Texto Libre)
     opciones_descripciones = list(respuestas.DESCRIPCIONES.keys())
     coincidencia_desc, puntaje_desc = process.extractOne(texto, opciones_descripciones)
+    
     if puntaje_desc >= 75:
         # Extraemos el texto y los botones dinámicos desde el diccionario
         texto_descripcion, botones_cierre = respuestas.DESCRIPCIONES[coincidencia_desc]
         return texto_descripcion, None, botones_cierre
 
-    # 5. FASE DE CIERRE: Búsqueda de Imágenes (Por botón o texto de costos)
-    mapeo_imagenes = {}
+    # 6. FASE DE CIERRE SECUNDARIO: Imágenes para palabras generales (ej. "paquetes")
+    mapeo_imagenes_secundario = {}
     for categoria, datos in menu_imagenes.CATALOGO_IMAGENES.items():
         for keyword in datos["palabras_clave"]:
-            mapeo_imagenes[keyword] = categoria
+            mapeo_imagenes_secundario[keyword] = categoria
             
-    opciones_img = list(mapeo_imagenes.keys())
-    coincidencia_img, puntaje_img = process.extractOne(texto, opciones_img)
+    opciones_img_sec = list(mapeo_imagenes_secundario.keys())
+    coincidencia_img_sec, puntaje_img_sec = process.extractOne(texto, opciones_img_sec)
     
-    import random
-    if puntaje_img >= 65:
-        categoria_encontrada = mapeo_imagenes[coincidencia_img]
+    if puntaje_img_sec >= 65:
+        import random
+        categoria_encontrada = mapeo_imagenes_secundario[coincidencia_img_sec]
         datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
         texto_elegido = random.choice(datos_categoria["textos"])
         imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
-        
         return texto_elegido, imagen_elegida, None
 
-    # 6. MENSAJE POR DEFECTO (Fallback)
+    # 7. MENSAJE POR DEFECTO (Fallback)
     return respuestas.MENSAJES["no_entiendo"], None, None
 
 
