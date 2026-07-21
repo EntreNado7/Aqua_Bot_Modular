@@ -184,30 +184,34 @@ def webhook():
         try:
             for entry in datos.get("entry", []):
                 
-               # 🟢 CASO 1: WhatsApp
+                # 🟢 CASO 1: WhatsApp
                 if "changes" in entry:
                     cambios = entry["changes"][0]["value"]
                     if "messages" in cambios:
                         mensaje_data = cambios["messages"][0]
-                        if "text" in mensaje_data:
+                        if "text" in mensaje_data or "interactive" in mensaje_data:
+                            
                             # --- ESCUDO ANTI-DUPLICADOS ---
                             mensaje_id = mensaje_data.get("id")
                             if mensaje_id in mensajes_procesados:
-                                print(f"Mensaje {mensaje_id} ya procesado. Ignorando.")
-                                continue # Salta al siguiente sin hacer nada
+                                continue 
                             mensajes_procesados.add(mensaje_id)
                             # ------------------------------
                             
-                            texto = mensaje_data["text"]["body"]
+                            # Extraemos el texto
+                            if "interactive" in mensaje_data:
+                                texto = mensaje_data["interactive"]["button_reply"]["title"]
+                            else:
+                                texto = mensaje_data["text"]["body"]
+                                
                             telefono = cambios["contacts"][0]["wa_id"]
                             
-                            # 🇲🇽 PARCHE PARA MÉXICO: Quitar el '1' de los números 521...
                             if telefono.startswith("521") and len(telefono) == 13:
                                 telefono = telefono.replace("521", "52", 1)
                             
-                            # Procesamos y ENVIAMOS respuesta (Atrapando texto e imagen)
-                            respuesta_texto, url_img = procesar_mensaje(telefono, texto)
-                            enviar_mensaje_wa(telefono, respuesta_texto, url_img)
+                            # AQUÍ ESTÁ LA SOLUCIÓN: Desempaquetamos 3 valores
+                            respuesta_texto, url_img, botones_interactivos = procesar_mensaje(telefono, texto)
+                            enviar_mensaje_wa(telefono, respuesta_texto, url_img, botones_interactivos)
                             
                 # 🔵🟣 CASO 2: Messenger / Instagram
                 elif "messaging" in entry:
@@ -216,15 +220,11 @@ def webhook():
                         texto = mensaje_data["message"]["text"]
                         sender_id = mensaje_data["sender"]["id"]
                         
-                        # Atrapamos respuesta, pero en Messenger enviamos texto por ahora
-                        # (La función de IG/FB aún necesita ajuste para imágenes)
-                        respuesta_texto, url_img = procesar_mensaje(sender_id, texto)
+                        # AQUÍ TAMBIÉN: Desempaquetamos 3 valores
+                        respuesta_texto, url_img, botones_interactivos = procesar_mensaje(sender_id, texto)
                         enviar_mensaje_messenger(sender_id, respuesta_texto)
                         
         except Exception as e:
             print(f"Error procesando mensaje: {e}") 
             
         return jsonify({"status": "ok"}), 200
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
