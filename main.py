@@ -127,16 +127,51 @@ def es_horario_habil():
 def procesar_mensaje(identificador, texto):
     texto = texto.lower().strip()
     
-    # 1. VERIFICAR CLIENTE EN NOTION
-    cliente_id = notion_api.verificar_cliente(identificador)
+    # 1. VERIFICAR CLIENTE EN NOTION Y OBTENER FECHA
+    cliente_id, fecha_ultima = notion_api.verificar_cliente(identificador)
+    
     if not cliente_id:
         notion_api.registrar_lead(identificador)
         texto_bienvenida = respuestas.MENSAJES["bienvenida_nueva"]
-        # Primer envío de botones (Límite: 3, máx 20 caracteres)
         mis_botones = ["📍 Ubicación", "🕒 Horarios", "🏊‍♂️ Ver Clases"]
         return texto_bienvenida, None, mis_botones
     else:
+        # Siempre actualizamos la fecha del nuevo mensaje
         notion_api.actualizar_interaccion(cliente_id, texto)
+
+    # 1.5 TEMPORIZADOR DE SESIÓN Y SALUDO DINÁMICO
+    sesion_nueva = False
+    
+    if fecha_ultima:
+        try:
+            # Calculamos cuántas horas han pasado desde el último mensaje
+            fecha_obj = datetime.fromisoformat(fecha_ultima.replace('Z', '+00:00')).replace(tzinfo=None)
+            diferencia_horas = (datetime.utcnow() - fecha_obj).total_seconds() / 3600
+            
+            if diferencia_horas > 12: # Si pasaron más de 12 horas, es una nueva sesión
+                sesion_nueva = True
+        except Exception as e:
+            print(f"Error al calcular tiempo: {e}")
+            sesion_nueva = True
+    else:
+        sesion_nueva = True 
+
+    # Interceptor de saludos manuales (por si saludan antes de las 12 hrs)
+    saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información"]
+    
+    if sesion_nueva or texto in saludos_directos:
+        hora_local = datetime.now().hour # Toma la hora exacta de Cuernavaca gracias a la variable de Render
+        
+        if hora_local < 12:
+            saludo = "¡Buenos días!"
+        elif hora_local < 19:
+            saludo = "¡Buenas tardes!"
+        else:
+            saludo = "¡Buenas noches!"
+            
+        texto_bienvenida = f"{saludo} 🌊 Qué gusto tenerte de vuelta.\n¿En qué te puedo ayudar hoy? Elige una opción:"
+        mis_botones = ["📍 Ubicación", "🕒 Horarios", "🏊‍♂️ Ver Clases"]
+        return texto_bienvenida, None, mis_botones
 
     # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto or "recepcion" in texto:
@@ -193,6 +228,8 @@ def procesar_mensaje(identificador, texto):
 
     # 6. MENSAJE POR DEFECTO (Fallback)
     return respuestas.MENSAJES["no_entiendo"], None, None
+
+
 # ==========================================
 # 🌐 CONEXIÓN OMNICANAL (WEBHOOK)
 # ==========================================
