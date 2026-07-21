@@ -104,15 +104,41 @@ CATALOGO_IMAGENES = {
         ]
     },
 
-    "clases_fitness": {
+"clases_fitness": {
         "links": ["https://i.postimg.cc/Dzh1M71g/CLASES-FITNESS.png"],
-        "palabras_clave": ["clases fitness", "clases en tierra", "clases tierra", "ejercicio en tierra", "entrenamiento funcional", "funcional", "spinning", "bicicleta", "yoga", "box", "boxeo", "gap", "gluteo abdomen pierna", "fitdance", "fit dance", "baile fitness", "senior health", "senior", "seniors", "adulto mayor", "cardio", "fuerza", "flexibilidad", "movilidad", "bienestar", "gimnasio"],
+        "palabras_clave": ["💲 costos fitness", "costos fitness", "precio fitness", "clases fitness", "clases en tierra", "clases tierra", "ejercicio en tierra", "entrenamiento funcional", "funcional", "spinning", "bicicleta", "yoga", "gap", "gluteo abdomen pierna", "fitdance", "fit dance", "baile fitness", "senior health", "senior", "seniors", "adulto mayor", "cardio", "fuerza", "flexibilidad", "movilidad", "bienestar", "gimnasio", "multidisciplina", "full power", "optimove"],
         "textos": [
-            """💙 En EntreNado, el movimiento no termina al salir de la alberca.\nCon nuestras Clases ÷ Tierra podrás mantenerte activo mediante disciplinas enfocadas en desarrollar fuerza, resistencia, movilidad, coordinación y bienestar integral, siempre en un ambiente dinámico y motivador.\n🚴 Spinning\n🧘 Yoga\n🥊 Box\n🍑 GAP\n💪 Funcional\n💃 FitDance\n👵 Senior's Health\n⏱️ Todas las sesiones tienen una duración de 55 minutos.\n📌 Consulta la imagen para conocer las opciones de clases semanales y sus mensualidades.\n✨ Si deseas agendar una clase muestra, uno de nuestros asesores estará encantado de ayudarte a encontrar la disciplina ideal para ti.""",
-            """🌊💙 En EntreNado creemos que el bienestar se vive dentro y fuera del agua.\nPor eso creamos nuestras Clases ÷ Tierra, un espacio donde podrás elegir entre diferentes disciplinas diseñadas para fortalecer tu cuerpo, mejorar tu condición física, desarrollar movilidad, aumentar tu resistencia o simplemente disfrutar de una vida más activa.\nNuestro programa incluye:\n🚴 Spinning\n🧘 Yoga\n🥊 Box\n🍑 GAP\n💪 Funcional\n💃 FitDance\n👵 Senior's Health\nTodas las clases son grupales, tienen una duración de 55 minutos y son impartidas por instructores especializados.\n📌 En la imagen encontrarás las opciones de clases por semana del lado izquierdo y el costo mensual correspondiente del lado derecho.\n💙 Si gustas agendar una clase muestra y conocer cuál de nuestras disciplinas se adapta mejor a tus objetivos, con gusto te pondremos en contacto con uno de nuestros asesores, quienes resolverán todas tus dudas y te ayudarán a dar el siguiente paso para formar parte de la comunidad EntreNado.""",
-            """🌊 En EntreNado creemos que el bienestar se vive dentro y fuera del agua. 💙\nPor eso creamos nuestras Clases ÷ Tierra, un espacio donde encontrarás disciplinas pensadas para fortalecer tu cuerpo, mejorar tu condición física y disfrutar de un estilo de vida más activo.\nPodrás elegir entre:\n🚴 Spinning\n🧘 Yoga\n🥊 Box\n🍑 GAP\n💪 Funcional\n💃 FitDance\n👵 Senior's Health\nTodas las clases son grupales, tienen una duración de 55 minutos y son impartidas por instructores especializados.\n📌 En la imagen encontrarás las opciones de clases por semana del lado izquierdo y el costo mensual correspondiente del lado derecho.\n💙 Si gustas agendar una clase muestra y conocer cuál disciplina se adapta mejor a tus objetivos, con gusto te pondremos en contacto con uno de nuestros asesores."""
+            """💙 En EntreNado, el movimiento no termina al salir de la alberca.\nCon nuestras Clases ÷ Tierra podrás mantenerte activo mediante disciplinas enfocadas en desarrollar fuerza, resistencia, movilidad, coordinación y bienestar integral, siempre en un ambiente dinámico y motivador.\n🚴 Spinning\n🧘 Yoga\n🍑 GAP\n💪 Funcional\n💃 FitDance\n👵 Senior's Health\n⚡ Full Power\n🔄 Optimove\n⏱️ Todas las sesiones tienen una duración de 55 minutos.\n📌 Consulta la imagen para conocer las opciones de clases semanales y sus mensualidades.\n\n💡 *Recuerda: El gran beneficio de este paquete es la flexibilidad. ¡Tú eliges cómo combinar las disciplinas durante tu semana!*""",
+            
+            """🌊💙 En EntreNado creemos que el bienestar se vive dentro y fuera del agua.\nPor eso creamos nuestras Clases ÷ Tierra, un espacio donde podrás elegir entre diferentes disciplinas diseñadas para fortalecer tu cuerpo, mejorar tu condición física, desarrollar movilidad, aumentar tu resistencia o simplemente disfrutar de una vida más activa.\nNuestro programa incluye:\n🚴 Spinning\n🧘 Yoga\n🍑 GAP\n💪 Funcional\n💃 FitDance\n👵 Senior's Health\n⚡ Full Power\n🔄 Optimove\nTodas las clases son grupales, tienen una duración de 55 minutos y son impartidas por instructores especializados.\n📌 En la imagen encontrarás las opciones de clases por semana y el costo mensual.\n\n💡 *¡Ojo! La ventaja de este paquete es que puedes combinar las clases como tú prefieras según los días que contrates.*""",
+            
+            """🌊 En EntreNado creemos que el bienestar se vive dentro y fuera del agua. 💙\nPor eso creamos nuestras Clases ÷ Tierra, un espacio donde encontrarás disciplinas pensadas para fortalecer tu cuerpo, mejorar tu condición física y disfrutar de un estilo de vida más activo.\nPodrás elegir entre:\n🚴 Spinning\n🧘 Yoga\n🍑 GAP\n💪 Funcional\n💃 FitDance\n👵 Senior's Health\n⚡ Full Power\n🔄 Optimove\nTodas las clases son grupales, tienen una duración de 55 minutos y son impartidas por instructores especializados.\n📌 En la imagen encontrarás las opciones de clases por semana y el costo mensual correspondiente.\n\n💡 *Dato genial: No estás atado a una sola clase. Si contratas 3 días, ¡puedes tomar 3 disciplinas diferentes!*"""
         ]
     },
+
+    "box": {
+        "links": ["https://i.postimg.cc/xdQL49LF/ESCUELA-DE-BOX.png"],
+        "palabras_clave": ["💲 costos box", "costos box", "precio box", "escuela de box", "mensualidad box", "boxeo"],
+        "textos": [
+            """🥊 Aquí tienes nuestra tabla de inversión para la especialidad de Box.\nRecuerda que estas clases están disponibles a partir de los 6 años en adelante. ¡Anímate a formar parte del equipo y liberar toda esa energía!""",
+            
+            """🥊 Te compartimos los costos para nuestras clases exclusivas de Box.\nYa sea para niños (desde los 6 años), jóvenes o adultos, es una excelente opción para ganar disciplina, agilidad y fuerza. ¡Revisa la imagen con los detalles!""",
+            
+            """🥊 Conoce la inversión para nuestro programa de Box.\nUn entrenamiento explosivo enfocado en técnica y combate, ideal para todas las edades a partir de los 6 años. ¡Checa la tabla de costos y elige tus días de entrenamiento!"""
+        ]
+    },
+
+    "open_gym": {
+        "links": ["https://i.postimg.cc/yNK0b7FH/OPENGYM.png"],
+        "palabras_clave": ["💲 costos open gym", "costos open gym", "precio open gym", "mensualidad open gym", "costo gym", "uso libre"],
+        "textos": [
+            """🏋️‍♂️ Te compartimos los costos y horarios específicos para nuestra modalidad de Open Gym.\nRecuerda que este formato es de uso libre y sin instructor. ¡El espacio ideal para seguir tu propia rutina a tu ritmo!""",
+            
+            """🏋️‍♂️ Aquí tienes la información de costos para Open Gym.\nEsta modalidad es perfecta si ya tienes tu propia rutina y solo buscas el equipo e instalaciones adecuadas. Revisa los horarios aplicables en la imagen.""",
+            
+            """🏋️‍♂️ Conoce nuestra tabla de inversión para Open Gym.\nDisfruta de la libertad de entrenar bajo tus propias reglas en los horarios establecidos (sin supervisión de instructor). ¡Toda la info está en la imagen adjunta!"""
+        ]
+    }
 
     "rehabilitacion": {
         "links": ["https://i.postimg.cc/fbvY41vP/REHABILITACION.png"],
