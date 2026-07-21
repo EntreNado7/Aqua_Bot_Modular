@@ -19,33 +19,37 @@ HEADERS = {
     "Notion-Version": "2022-06-28"
 }
 
-def verificar_cliente(telefono):
-    """
-    Busca si el número de teléfono ya existe en la base de datos de Notion.
-    Retorna el ID de la página si existe, o None si es un cliente nuevo.
-    """
-    # URL corregida: https://api.notion.com/...
+def verificar_cliente(identificador):
+    """Verifica si el cliente existe y devuelve su ID junto con la fecha de su última interacción."""
     url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
-    
     payload = {
         "filter": {
-            "property": "Telefono",
-            "title": {  
-                "equals": telefono
+            "property": "Telefono", # Ajusta este nombre si tu columna se llama diferente (ej. "title")
+            "title": {
+                "equals": identificador
             }
         }
     }
-    
     try:
         response = requests.post(url, headers=HEADERS, json=payload)
         data = response.json()
-        
-        if data.get("results"):
-            return data["results"][0]["id"]
-        return None
+        results = data.get("results", [])
+        if results:
+            page_id = results[0]["id"]
+            
+            # Extraemos la fecha del último mensaje registrado
+            props = results[0].get("properties", {})
+            fecha_iso = None
+            if "Fecha" in props and "date" in props["Fecha"] and props["Fecha"]["date"]:
+                fecha_iso = props["Fecha"]["date"]["start"]
+                
+            return page_id, fecha_iso # Ahora devolvemos 2 datos
+            
+        return None, None
     except Exception as e:
-        print(f"Error al verificar cliente en Notion: {e}")
-        return None
+        print(f"Error al verificar cliente: {e}")
+        return None, None
+
 
 def registrar_lead(telefono, canal="WhatsApp", interes="General"):
     """
