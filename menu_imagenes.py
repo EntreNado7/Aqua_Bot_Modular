@@ -138,7 +138,7 @@ CATALOGO_IMAGENES = {
             
             """🏋️‍♂️ Conoce nuestra tabla de inversión para Open Gym.\nDisfruta de la libertad de entrenar bajo tus propias reglas en los horarios establecidos (sin supervisión de instructor). ¡Toda la info está en la imagen adjunta!"""
         ]
-    }
+    },
 
     "rehabilitacion": {
         "links": ["https://i.postimg.cc/fbvY41vP/REHABILITACION.png"],
