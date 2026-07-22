@@ -74,3 +74,31 @@ DESCRIPCIONES = {
 }
 # 3. Firma Dinámica (Pie de mensaje para retención)
 FIRMA_DINAMICA = "\n\n¿Te puedo ayudar con algo más? 👇"
+
+
+
+# ==========================================
+# MENÚS DE LISTA (NUEVA FUNCIÓN)
+# ==========================================
+TEXTO_FITNESS = "💪 *Clases Fitness (Multidisciplina)*\nContamos con 8 disciplinas diseñadas para fortalecer tu cuerpo y mejorar tu condición física.\n\n👇 *Toca el botón de abajo para descubrir de qué trata cada una y encontrar tu favorita.*"
+
+LISTA_FITNESS = {
+    "header": "Disciplinas Fitness 🏊‍♂️",
+    "button_text": "📋 Elegir Disciplina",
+    "footer": "Club Deportivo EntreNado",
+    "sections": [
+        {
+            "title": "Clases Disponibles",
+            "rows": [
+                {"id": "f_spin", "title": "🚴 Spinning", "description": "Cardio intenso en bicicleta"},
+                {"id": "f_yoga", "title": "🧘 Yoga", "description": "Flexibilidad, fuerza y postura"},
+                {"id": "f_gap", "title": "🍑 GAP", "description": "Glúteo, Abdomen y Pierna"},
+                {"id": "f_func", "title": "💪 Funcional", "description": "Fuerza y resistencia total"},
+                {"id": "f_dance", "title": "💃 FitDance", "description": "Quema calorías bailando"},
+                {"id": "f_sen", "title": "👵 Senior Health", "description": "Movimiento seguro sin impacto"},
+                {"id": "f_power", "title": "⚡ Full Power", "description": "Fuerza y potencia al máximo"},
+                {"id": "f_opti", "title": "🔄 Optimove", "description": "Biomecánica y movilidad articular"}
+            ]
+        }
+    ]
+}
