@@ -30,6 +30,9 @@ mensajes_procesados = set()  # <-- NUEVA LÍNEA: Libreta de mensajes atendidos
 # ==========================================
 # 🗣️ "CUERDAS VOCALES" (Envío a WhatsApp)
 # ==========================================
+# ==========================================
+# 🗣️ "CUERDAS VOCALES" (Envío a WhatsApp)
+# ==========================================
 def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None, botones=None):
     """Envía texto, imagen, botones interactivos o menús de lista."""
     url = f"https://graph.facebook.com/v18.0/{PHONE_NUMBER_ID}/messages"
@@ -39,7 +42,7 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None, botones=None):
         "Content-Type": "application/json"
     }
     
-# 1️⃣ CASO: Enviar Botones Interactivos (Si recibe una lista [])
+    # 1️⃣ CASO: Enviar Botones Interactivos (Si recibe una lista [])
     if botones and isinstance(botones, list):
         lista_botones = []
         for i, titulo in enumerate(botones):
@@ -62,13 +65,13 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None, botones=None):
             }
         }
         
-        # ¡NUEVA MAGIA! Si enviamos imagen y botones al mismo tiempo, Meta la pone de encabezado
+        # 🌟 MAGIA: Si hay imagen Y botones, ponemos la imagen como encabezado
         if url_imagen:
             payload["interactive"]["header"] = {
                 "type": "image",
                 "image": {"link": url_imagen}
             }
-        
+            
     # 1.5️⃣ CASO NUEVO: Enviar Menú de Lista (Si recibe un diccionario {})
     elif botones and isinstance(botones, dict):
         payload = {
@@ -87,7 +90,7 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None, botones=None):
             }
         }
         
-    # 2️⃣ CASO: Enviar Imagen con Texto
+    # 2️⃣ CASO: Enviar Imagen con Texto (Sin botones)
     elif url_imagen:
         payload = {
             "messaging_product": "whatsapp",
@@ -313,7 +316,7 @@ def procesar_mensaje(identificador, texto):
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["open gym"]
         return desc_texto, None, desc_botones
 
-    # 4. FASE DE CIERRE PRIORITARIO (Si detectamos que el usuario quiere precios)
+   # 4. FASE DE CIERRE PRIORITARIO (Si detectamos que el usuario quiere precios)
     if "costo" in texto or "precio" in texto or "💲" in texto or "mensualidad" in texto:
         mapeo_imagenes = {}
         for categoria, datos in menu_imagenes.CATALOGO_IMAGENES.items():
@@ -323,13 +326,15 @@ def procesar_mensaje(identificador, texto):
         opciones_img = list(mapeo_imagenes.keys())
         coincidencia_img, puntaje_img = process.extractOne(texto, opciones_img)
         
-        if puntaje_img >= 65:
+            if puntaje_img >= 65:
             import random
             categoria_encontrada = mapeo_imagenes[coincidencia_img]
             datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
             texto_elegido = random.choice(datos_categoria["textos"])
             imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
-            return texto_elegido, imagen_elegida, None
+            
+            # 🔥 RETORNO CORREGIDO: Texto, Imagen y el Botón
+            return texto_elegido, imagen_elegida, ["🗣️ Asesor"]
 
     # 5. FASE DE EXPLORACIÓN: Búsqueda de Descripciones (Texto Libre)
     opciones_descripciones = list(respuestas.DESCRIPCIONES.keys())
@@ -349,13 +354,15 @@ def procesar_mensaje(identificador, texto):
     opciones_img_sec = list(mapeo_imagenes_secundario.keys())
     coincidencia_img_sec, puntaje_img_sec = process.extractOne(texto, opciones_img_sec)
     
-    if puntaje_img_sec >= 65:
+        if puntaje_img_sec >= 65:
         import random
         categoria_encontrada = mapeo_imagenes_secundario[coincidencia_img_sec]
         datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
         texto_elegido = random.choice(datos_categoria["textos"])
         imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
-        return texto_elegido, imagen_elegida, None
+        
+        # 🔥 RETORNO CORREGIDO: Texto, Imagen y el Botón
+        return texto_elegido, imagen_elegida, ["🗣️ Asesor"]
 
     # 7. MENSAJE POR DEFECTO (Fallback)
     return respuestas.MENSAJES["no_entiendo"], None, None
