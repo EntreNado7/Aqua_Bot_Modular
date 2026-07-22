@@ -140,10 +140,6 @@ def es_horario_habil():
         return 8 <= hora < 14
     return False
 
-
-# ==========================================
-# 🧠 LÓGICA PRINCIPAL DEL CHAT
-# ==========================================
 # ==========================================
 # 🧠 LÓGICA PRINCIPAL DEL CHAT
 # ==========================================
@@ -182,8 +178,21 @@ def procesar_mensaje(identificador, texto):
     # Interceptor de saludos manuales y comandos de reinicio
     saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información", "reset", "reiniciar", "inicio"]
     
-    # ESCUDO PARA BOTONES: Si presiona un botón del sistema, no reiniciamos el menú.
-    botones_sistema = ["📍 ubicación", "ubicación", "ubicacion", "🕒 horarios", "horarios", "🏊‍♂️ ver clases", "ver clases"]
+    # ESCUDO PARA BOTONES AMPLIADO: Cubre el retraso de Notion al navegar por los submenús
+    botones_sistema = [
+        "📍 ubicación", "ubicación", "ubicacion", 
+        "🕒 horarios", "horarios", 
+        "🏊‍♂️ ver clases", "ver clases",
+        "💦 clases ÷agua", "clases ÷agua", "clases de agua", "agua",
+        "🌍 clases ÷tierra", "clases ÷tierra", "clases de tierra", "tierra",
+        "🎁 paquetes combo", "paquetes combo", "combo",
+        "💪 clases fitness", "clases fitness", "fitness",
+        "🥊 box", "boxeo",
+        "🏋️‍♂️ open gym", "gym",
+        "🧑 adultos", "adultos",
+        "👧 infantiles/juv", "infantiles",
+        "👶 bebés", "bebes"
+    ]
     
     if texto in saludos_directos or (sesion_nueva and texto not in botones_sistema):
         hora_local = datetime.now().hour # Toma la hora exacta de Cuernavaca gracias a la variable de Render
@@ -198,7 +207,6 @@ def procesar_mensaje(identificador, texto):
         texto_bienvenida = f"{saludo} 🌊 Qué gusto tenerte de vuelta.\n¿En qué te puedo ayudar hoy? Elige una opción:"
         mis_botones = ["📍 Ubicación", "🕒 Horarios", "🏊‍♂️ Ver Clases"]
         return texto_bienvenida, None, mis_botones
-
     # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto or "recepcion" in texto:
         notion_api.solicitar_humano(cliente_id)
