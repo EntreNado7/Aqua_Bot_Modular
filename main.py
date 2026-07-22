@@ -178,7 +178,7 @@ def procesar_mensaje(identificador, texto):
     # Interceptor de saludos manuales y comandos de reinicio
     saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información", "reset", "reiniciar", "inicio"]
     
-    # ESCUDO PARA BOTONES TOTAL: Cubre toda la navegación, menús de lista y botones de venta
+   # ESCUDO PARA BOTONES TOTAL: Cubre toda la navegación, menús de lista y botones de venta
     botones_sistema = [
         "📍 ubicación", "ubicación", "ubicacion", 
         "🕒 horarios", "horarios", 
@@ -189,22 +189,24 @@ def procesar_mensaje(identificador, texto):
         "💪 clases fitness", "clases fitness", "fitness",
         "🥊 box", "boxeo",
         "🏋️‍♂️ open gym", "gym", "uso libre",
-        "🧑 adultos", "adultos",
-        "👧 infantiles/juv", "infantiles",
-        "👶 bebés", "bebes",
-        # --- Disciplinas del Menú de Lista ---
-        "🚴 spinning", "spinning",
-        "🧘 yoga", "yoga",
-        "🍑 gap", "gap",
-        "💪 funcional", "funcional",
-        "💃 fitdance", "fitdance",
+        # --- Disciplinas Tierra ---
+        "🚴 spinning", "spinning", "🧘 yoga", "yoga", "🍑 gap", "gap",
+        "💪 funcional", "funcional", "💃 fitdance", "fitdance",
         "👵 senior health", "senior health", "senior",
-        "⚡ full power", "full power",
-        "🔄 optimove", "optimove",
+        "⚡ full power", "full power", "🔄 optimove", "optimove",
+        # --- Disciplinas Agua (NUEVO) ---
+        "👶 bebés", "bebes", "🐬 grupales infantiles", "grupales infantiles",
+        "⭐ infantiles personal", "infantiles personal",
+        "🏊‍♂️ nado libre", "nado libre", "💦 aquafitness", "aquafitness",
+        "⭐ adultos personal", "adultos personal",
+        "👩‍👦 mamá & bebé", "mamá & bebé", "mama & bebe",
+        "🩹 rehabilitación", "rehabilitación", "rehabilitacion",
         # --- Botones de Cierre y Venta ---
-        "💲 costos fitness", "costos fitness",
-        "💲 costos box", "costos box",
-        "💲 costos open gym", "costos open gym",
+        "💲 costos fitness", "costos fitness", "💲 costos box", "costos box", "💲 costos open gym", "costos open gym",
+        "💲 costos bebés", "costos bebés", "💲 costos infantiles", "costos infantiles",
+        "💲 costos n. libre", "costos n. libre", "💲 costos aquafit", "costos aquafit",
+        "💲 costos personal", "costos personal", "💲 costos mamá bebé", "costos mamá bebé",
+        "💲 costos rehab", "costos rehab",
         "🗣️ asesor", "asesor", "humano", "recepcion"
     ]
     
@@ -253,7 +255,7 @@ def procesar_mensaje(identificador, texto):
         
         return texto_handoff, None, None
 
-    # 3. INTERACCIONES DE MENÚ PRINCIPAL (Botones Fijos)
+   # 3. INTERACCIONES DE MENÚ PRINCIPAL (Botones Fijos)
     if texto in ["📍 ubicación", "ubicación", "ubicacion"]:
         return respuestas.MENSAJES["ubicacion"], None, None
     elif texto in ["🕒 horarios", "horarios"]:
@@ -264,7 +266,8 @@ def procesar_mensaje(identificador, texto):
     
     # 3.1 BIFURCACIONES DEL MENÚ DE AGUA
     elif texto in ["💦 clases ÷agua", "clases ÷agua", "clases de agua", "agua"]:
-        return respuestas.MENSAJES["menu_agua"], None, ["🧑 Adultos", "👧 Infantiles/Juv", "👶 Bebés"]
+        # AQUÍ DISPARAMOS EL NUEVO MENÚ DE LISTA DE AGUA
+        return respuestas.TEXTO_AGUA, None, respuestas.LISTA_AGUA
         
     elif texto in ["🧑 adultos", "adultos"]:
         return respuestas.MENSAJES["menu_adultos"], None, None
