@@ -266,20 +266,23 @@ def procesar_mensaje(identificador, texto):
     
     # 3.1 BIFURCACIONES DEL MENÚ DE AGUA
     elif texto in ["💦 clases ÷agua", "clases ÷agua", "clases de agua", "agua"]:
-        # AQUÍ DISPARAMOS EL NUEVO MENÚ DE LISTA DE AGUA
-        return respuestas.TEXTO_AGUA, None, respuestas.LISTA_AGUA
+        # Mostramos los 3 grandes segmentos primero
+        return respuestas.MENSAJES["menu_agua"], None, ["🧑 Adultos", "👧 Infantiles/Juv", "👶 Bebés"]
         
     elif texto in ["🧑 adultos", "adultos"]:
-        return respuestas.MENSAJES["menu_adultos"], None, None
+        # AQUÍ DISPARAMOS LA LISTA DE ADULTOS
+        return respuestas.TEXTO_ADULTOS, None, respuestas.LISTA_ADULTOS
         
     elif texto in ["👧 infantiles/juv", "infantiles/juv", "infantiles", "juveniles"]:
-        return respuestas.MENSAJES["menu_infantiles"], None, None
+        # AQUÍ DISPARAMOS LA LISTA DE INFANTILES
+        return respuestas.TEXTO_INFANTILES, None, respuestas.LISTA_INFANTILES
 
     elif texto in ["mamá & bebé", "mama & bebe", "mamá y bebé", "mama y bebe", "mama", "mamá"]:
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["mama y bebe"]
         return desc_texto, None, desc_botones
         
     elif texto in ["👶 bebés", "bebes"]:
+        # BEBÉS VA DIRECTO A LA DESCRIPCIÓN (Ahorramos un clic)
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["bebes"]
         return desc_texto, None, desc_botones
         
