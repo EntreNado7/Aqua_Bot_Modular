@@ -158,7 +158,7 @@ def procesar_mensaje(identificador, texto):
         # Siempre actualizamos la fecha del nuevo mensaje
         notion_api.actualizar_interaccion(cliente_id, texto)
 
-    # 1.5 TEMPORIZADOR DE SESIÓN Y SALUDO DINÁMICO
+   # 1.5 TEMPORIZADOR DE SESIÓN Y SALUDO DINÁMICO
     sesion_nueva = False
     
     if fecha_ultima:
@@ -171,14 +171,14 @@ def procesar_mensaje(identificador, texto):
                 sesion_nueva = True
         except Exception as e:
             print(f"Error al calcular tiempo: {e}")
-            sesion_nueva = False # <--- ¡FIX: No trabamos la sesión si hay error en Notion!
+            sesion_nueva = False # FIX: No trabamos la sesión si hay error en Notion
     else:
         sesion_nueva = True 
 
     # Interceptor de saludos manuales y comandos de reinicio
     saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información", "reset", "reiniciar", "inicio"]
     
-    # ESCUDO PARA BOTONES AMPLIADO: Cubre el retraso de Notion al navegar por los submenús
+    # ESCUDO PARA BOTONES TOTAL: Cubre toda la navegación, menús de lista y botones de venta
     botones_sistema = [
         "📍 ubicación", "ubicación", "ubicacion", 
         "🕒 horarios", "horarios", 
@@ -188,14 +188,28 @@ def procesar_mensaje(identificador, texto):
         "🎁 paquetes combo", "paquetes combo", "combo",
         "💪 clases fitness", "clases fitness", "fitness",
         "🥊 box", "boxeo",
-        "🏋️‍♂️ open gym", "gym",
+        "🏋️‍♂️ open gym", "gym", "uso libre",
         "🧑 adultos", "adultos",
         "👧 infantiles/juv", "infantiles",
-        "👶 bebés", "bebes"
+        "👶 bebés", "bebes",
+        # --- Disciplinas del Menú de Lista ---
+        "🚴 spinning", "spinning",
+        "🧘 yoga", "yoga",
+        "🍑 gap", "gap",
+        "💪 funcional", "funcional",
+        "💃 fitdance", "fitdance",
+        "👵 senior health", "senior health", "senior",
+        "⚡ full power", "full power",
+        "🔄 optimove", "optimove",
+        # --- Botones de Cierre y Venta ---
+        "💲 costos fitness", "costos fitness",
+        "💲 costos box", "costos box",
+        "💲 costos open gym", "costos open gym",
+        "🗣️ asesor", "asesor", "humano", "recepcion"
     ]
     
     if texto in saludos_directos or (sesion_nueva and texto not in botones_sistema):
-        hora_local = datetime.now().hour # Toma la hora exacta de Cuernavaca gracias a la variable de Render
+        hora_local = datetime.now().hour # Toma la hora exacta de Cuernavaca
         
         if hora_local < 12:
             saludo = "¡Buenos días!"
@@ -207,6 +221,9 @@ def procesar_mensaje(identificador, texto):
         texto_bienvenida = f"{saludo} 🌊 Qué gusto tenerte de vuelta.\n¿En qué te puedo ayudar hoy? Elige una opción:"
         mis_botones = ["📍 Ubicación", "🕒 Horarios", "🏊‍♂️ Ver Clases"]
         return texto_bienvenida, None, mis_botones
+
+
+    
     # 2. BOTÓN DE ASESOR (HANDOFF)
     if "asesor" in texto or "humano" in texto or "recepcion" in texto:
         notion_api.solicitar_humano(cliente_id)
