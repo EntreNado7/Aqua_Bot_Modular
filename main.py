@@ -39,7 +39,7 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None, botones=None):
         "Content-Type": "application/json"
     }
     
-    # 1️⃣ CASO: Enviar Botones Interactivos (Si recibe una lista [])
+# 1️⃣ CASO: Enviar Botones Interactivos (Si recibe una lista [])
     if botones and isinstance(botones, list):
         lista_botones = []
         for i, titulo in enumerate(botones):
@@ -61,6 +61,13 @@ def enviar_mensaje_wa(telefono, texto_respuesta, url_imagen=None, botones=None):
                 "action": {"buttons": lista_botones}
             }
         }
+        
+        # ¡NUEVA MAGIA! Si enviamos imagen y botones al mismo tiempo, Meta la pone de encabezado
+        if url_imagen:
+            payload["interactive"]["header"] = {
+                "type": "image",
+                "image": {"link": url_imagen}
+            }
         
     # 1.5️⃣ CASO NUEVO: Enviar Menú de Lista (Si recibe un diccionario {})
     elif botones and isinstance(botones, dict):
@@ -178,7 +185,7 @@ def procesar_mensaje(identificador, texto):
     # Interceptor de saludos manuales y comandos de reinicio
     saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información", "reset", "reiniciar", "inicio"]
     
-   # ESCUDO PARA BOTONES TOTAL: Cubre toda la navegación, menús de lista y botones de venta
+# ESCUDO PARA BOTONES TOTAL: Cubre toda la navegación, menús de lista y botones de venta
     botones_sistema = [
         "📍 ubicación", "ubicación", "ubicacion", 
         "🕒 horarios", "horarios", 
@@ -186,20 +193,23 @@ def procesar_mensaje(identificador, texto):
         "💦 clases ÷agua", "clases ÷agua", "clases de agua", "agua",
         "🌍 clases ÷tierra", "clases ÷tierra", "clases de tierra", "tierra",
         "🎁 paquetes combo", "paquetes combo", "combo",
-        "💪 clases fitness", "clases fitness", "fitness",
-        "🥊 box", "boxeo",
-        "🏋️‍♂️ open gym", "gym", "uso libre",
+        "💪 clases fitness", "clases fitness", "fitness", "multidisciplina",
+        "🥊 box", "boxeo", "escuela de box",
+        "🏋️‍♂️ open gym", "gym", "uso libre", "open",
+        "🧑 adultos", "adultos",
+        "👧 infantiles/juv", "infantiles", "juveniles", "infantiles/juv",
+        "👶 bebés", "bebes",
         # --- Disciplinas Tierra ---
         "🚴 spinning", "spinning", "🧘 yoga", "yoga", "🍑 gap", "gap",
         "💪 funcional", "funcional", "💃 fitdance", "fitdance",
         "👵 senior health", "senior health", "senior",
         "⚡ full power", "full power", "🔄 optimove", "optimove",
-        # --- Disciplinas Agua (NUEVO) ---
-        "👶 bebés", "bebes", "🐬 grupales infantiles", "grupales infantiles",
+        # --- Disciplinas Agua ---
+        "🐬 grupales infantiles", "grupales infantiles",
         "⭐ infantiles personal", "infantiles personal",
         "🏊‍♂️ nado libre", "nado libre", "💦 aquafitness", "aquafitness",
         "⭐ adultos personal", "adultos personal",
-        "👩‍👦 mamá & bebé", "mamá & bebé", "mama & bebe",
+        "👩‍👦 mamá & bebé", "mamá & bebé", "mama & bebe", "mama", "mamá",
         "🩹 rehabilitación", "rehabilitación", "rehabilitacion",
         # --- Botones de Cierre y Venta ---
         "💲 costos fitness", "costos fitness", "💲 costos box", "costos box", "💲 costos open gym", "costos open gym",
@@ -442,7 +452,8 @@ def procesar_mensaje(identificador, texto):
             datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
             texto_elegido = random.choice(datos_categoria["textos"])
             imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
-            return texto_elegido, imagen_elegida, None
+            # Reemplaza en la FASE 4 (y también en la FASE 6):
+            return texto_elegido, imagen_elegida, ["🗣️ Asesor"]
 
     # 5. FASE DE EXPLORACIÓN: Búsqueda de Descripciones (Texto Libre)
     opciones_descripciones = list(respuestas.DESCRIPCIONES.keys())
@@ -468,7 +479,8 @@ def procesar_mensaje(identificador, texto):
         datos_categoria = menu_imagenes.CATALOGO_IMAGENES[categoria_encontrada]
         texto_elegido = random.choice(datos_categoria["textos"])
         imagen_elegida = datos_categoria["links"][0] if datos_categoria["links"] else None
-        return texto_elegido, imagen_elegida, None
+       # Reemplaza en la FASE 4 (y también en la FASE 6):
+        return texto_elegido, imagen_elegida, ["🗣️ Asesor"]
 
     # 7. MENSAJE POR DEFECTO (Fallback)
     return respuestas.MENSAJES["no_entiendo"], None, None
