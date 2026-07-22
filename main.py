@@ -140,6 +140,7 @@ def es_horario_habil():
         return 8 <= hora < 14
     return False
 
+
 # ==========================================
 # 🧠 LÓGICA PRINCIPAL DEL CHAT
 # ==========================================
@@ -174,14 +175,17 @@ def procesar_mensaje(identificador, texto):
                 sesion_nueva = True
         except Exception as e:
             print(f"Error al calcular tiempo: {e}")
-            sesion_nueva = True
+            sesion_nueva = False # <--- ¡FIX: No trabamos la sesión si hay error en Notion!
     else:
         sesion_nueva = True 
 
     # Interceptor de saludos manuales y comandos de reinicio
     saludos_directos = ["hola", "holas", "buenos dias", "buenas tardes", "buenas noches", "menu", "menú", "info", "informacion", "información", "reset", "reiniciar", "inicio"]
     
-    if sesion_nueva or texto in saludos_directos:
+    # ESCUDO PARA BOTONES: Si presiona un botón del sistema, no reiniciamos el menú.
+    botones_sistema = ["📍 ubicación", "ubicación", "ubicacion", "🕒 horarios", "horarios", "🏊‍♂️ ver clases", "ver clases"]
+    
+    if texto in saludos_directos or (sesion_nueva and texto not in botones_sistema):
         hora_local = datetime.now().hour # Toma la hora exacta de Cuernavaca gracias a la variable de Render
         
         if hora_local < 12:
@@ -468,12 +472,16 @@ def webhook():
                             mensajes_procesados.add(mensaje_id)
                             # ------------------------------
                             
-                            # Extraemos el texto
+                            # --- EXTRAEMOS EL TEXTO (NUEVO OÍDO PARA LISTAS) ---
                             if "interactive" in mensaje_data:
-                                texto = mensaje_data["interactive"]["button_reply"]["title"]
+                                if "button_reply" in mensaje_data["interactive"]:
+                                    texto = mensaje_data["interactive"]["button_reply"]["title"]
+                                elif "list_reply" in mensaje_data["interactive"]:
+                                    texto = mensaje_data["interactive"]["list_reply"]["title"]
                             else:
                                 texto = mensaje_data["text"]["body"]
-                                
+                            # ---------------------------------------------------
+                            
                             telefono = cambios["contacts"][0]["wa_id"]
                             
                             if telefono.startswith("521") and len(telefono) == 13:
