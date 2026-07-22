@@ -104,25 +104,17 @@ LISTA_FITNESS = {
 }
 
 # ==========================================
-# MENÚ DE LISTA PARA AGUA
+# MENÚS DE LISTA PARA AGUA (DIVIDIDOS)
 # ==========================================
-TEXTO_AGUA = "💦 *Clases de Agua*\nContamos con programas diseñados para todas las edades y niveles, desde bebés hasta adultos mayores, en una alberca techada y climatizada. 🌡️\n\n👇 *Toca el botón de abajo para explorar nuestras clases y encontrar la ideal para ti.*"
+TEXTO_ADULTOS = "🧑 *Clases para Adultos y Especialidades*\nContamos con opciones para que entrenes, te relajes o te recuperes a tu propio ritmo. 💧\n\n👇 *Toca el botón de abajo para explorar nuestras clases.*"
 
-LISTA_AGUA = {
-    "header": "Clases de Agua 🏊‍♂️",
+LISTA_ADULTOS = {
+    "header": "Adultos y Especialidades",
     "button_text": "📋 Elegir Clase",
     "footer": "Club Deportivo EntreNado",
     "sections": [
         {
-            "title": "Bebés e Infantiles",
-            "rows": [
-                {"id": "a_bebes", "title": "👶 Bebés", "description": "Natación temprana y supervivencia"},
-                {"id": "a_inf_grup", "title": "🐬 Grupales Infantiles", "description": "Aprendizaje seguro por niveles"},
-                {"id": "a_inf_pers", "title": "⭐ Infantiles Personal", "description": "Atención exclusiva 1 a 1"}
-            ]
-        },
-        {
-            "title": "Adultos y Especialidades",
+            "title": "Opciones Disponibles",
             "rows": [
                 {"id": "a_nado", "title": "🏊‍♂️ Nado Libre", "description": "Entrena a tu propio ritmo"},
                 {"id": "a_aqua", "title": "💦 Aquafitness", "description": "Cardio divertido sin impacto"},
@@ -134,6 +126,22 @@ LISTA_AGUA = {
     ]
 }
 
+TEXTO_INFANTILES = "👧👦 *Clases Infantiles y Juveniles*\nProgramas seguros y divertidos para que los más pequeños aprendan a nadar y mejoren su técnica. 🐬\n\n👇 *Toca el botón de abajo para ver las opciones.*"
+
+LISTA_INFANTILES = {
+    "header": "Infantiles y Juveniles",
+    "button_text": "📋 Elegir Clase",
+    "footer": "Club Deportivo EntreNado",
+    "sections": [
+        {
+            "title": "Opciones Disponibles",
+            "rows": [
+                {"id": "a_inf_grup", "title": "🐬 Grupales Infantiles", "description": "Aprendizaje seguro por niveles"},
+                {"id": "a_inf_pers", "title": "⭐ Infantiles Personal", "description": "Atención exclusiva 1 a 1"}
+            ]
+        }
+    ]
+}
 
 
 
