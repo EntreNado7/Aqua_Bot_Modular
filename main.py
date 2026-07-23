@@ -199,9 +199,10 @@ def procesar_mensaje(identificador, texto):
         "👧 infantiles/juv", "infantiles", "juveniles", "infantiles/juv",
         "👶 bebés", "bebes",
         
+      
         # --- Nombres Nuevos de Botones Combos ---
         "💪 modo activo", "modo activo",
-        "🐦‍🔥 movilidad integral", "movilidad integral",
+        "🌿movilidad íntegra", "🌿movilidad integra", "movilidad íntegra", "movilidad integra",
         "⚡ alto rendimiento", "alto rendimiento",
         
         # --- Títulos Exactos de las Listas de Combos ---
@@ -317,12 +318,12 @@ def procesar_mensaje(identificador, texto):
 
 # 3.3 BIFURCACIONES DE COMBOS (FULL ENTRENADO)
     elif texto in ["⚡ full entrenado", "full entrenado", "combos"]:
-        return respuestas.TEXTO_MENU_COMBOS, respuestas.LOGO_CARMIN, ["💪 Modo Activo", "🐦‍🔥 Movilidad Integral", "⚡ Alto Rendimiento"]
+        return respuestas.TEXTO_MENU_COMBOS, respuestas.LOGO_CARMIN, ["💪 Modo Activo", "🌿Movilidad Íntegra", "⚡ Alto Rendimiento"]
         
     elif texto in ["💪 modo activo", "modo activo"]:
         return respuestas.TEXTO_ACTIVO, None, respuestas.LISTA_ACTIVO
         
-    elif texto in ["🐦‍🔥 movilidad integral", "movilidad integral"]:
+    elif texto in ["🌿movilidad íntegra", "🌿movilidad integra", "movilidad íntegra", "movilidad integra"]:
         return respuestas.TEXTO_RECUPERACION, None, respuestas.LISTA_RECUPERACION
         
     elif texto in ["⚡ alto rendimiento", "alto rendimiento"]:
