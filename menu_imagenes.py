@@ -205,7 +205,7 @@ CATALOGO_IMAGENES = {
     },
     "combo_domina": {
         "textos": ["Aquí tienes la tabla de inversión para el Paquete DOMINA. 🏆"],
-        "links": ["https://i.postimg.cc/W4V0Hs05/DOMINA.png"],
+        "links": ["https://i.postimg.cc/W1JN7FDX/DOMINA.png"],
         "palabras_clave": ["costos domina", "precio domina", "domina"]
     },
     "combo_maximiza": {
