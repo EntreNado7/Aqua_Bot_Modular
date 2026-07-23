@@ -165,3 +165,54 @@ CATALOGO_IMAGENES = {
         ]
     }
 }
+
+
+
+
+
+# --- PAQUETES COMBO (FULL ENTRENADO) ---
+    "combo_activa": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete ACTIVA. 💪"],
+        "links": ["https://i.postimg.cc/HsQFtPfH/ACTIVA.png"],
+        "palabras_clave": ["costos activa", "precio activa", "activa"]
+    },
+    "combo_impulsa": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete IMPULSA. 🔥"],
+        "links": ["https://i.postimg.cc/Bv32VJ2d/IMPULSA.png"],
+        "palabras_clave": ["costos impulsa", "precio impulsa", "impulsa"]
+    },
+    "combo_evoluciona": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete EVOLUCIONA. 🚀"],
+        "links": ["https://i.postimg.cc/PqH1Rd16/EVOLUCIONA.png"],
+        "palabras_clave": ["costos evoluciona", "precio evoluciona", "evoluciona"]
+    },
+    "combo_vitaliza": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete VITALIZA. 🌿"],
+        "links": ["https://i.postimg.cc/FKx0twxq/VITALIZA.png"],
+        "palabras_clave": ["costos vitaliza", "precio vitaliza", "vitaliza"]
+    },
+    "combo_reanima": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete REANIMA. 💦"],
+        "links": ["https://i.postimg.cc/xdPLrBP4/REANIMA.png"],
+        "palabras_clave": ["costos reanima", "precio reanima", "reanima"]
+    },
+    "combo_acondiciona": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete ACONDICIONA. 🔄"],
+        "links": ["https://i.postimg.cc/prLZ1Pbc/ACONDICIONA.png"],
+        "palabras_clave": ["costos acondiciona", "precio acondiciona", "acondiciona"]
+    },
+    "combo_fortaleza": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete FORTALEZA. 🫂"],
+        "links": ["https://i.postimg.cc/yNK0b70Q/FORTALEZA.png"],
+        "palabras_clave": ["costos fortaleza", "precio fortaleza", "fortaleza"]
+    },
+    "combo_domina": {
+        "textos": ["Aquí tienes la tabla de inversión para el Paquete DOMINA. 🏆"],
+        "links": ["https://i.postimg.cc/W4V0Hs05/DOMINA.png"],
+        "palabras_clave": ["costos domina", "precio domina", "domina"]
+    },
+    "combo_maximiza": {
+        "textos": ["Aquí tienes la tabla de inversión de tu acceso total MAXIMIZA. ♾️"],
+        "links": ["https://i.postimg.cc/zfNTcqnY/MAXIMIZA.png"],
+        "palabras_clave": ["costos maximiza", "precio maximiza", "maximiza", "ilimitado"]
+    }
