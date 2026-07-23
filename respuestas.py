@@ -71,6 +71,20 @@ DESCRIPCIONES = {
     "full power": ("⚡ *Full Power*\n¡Lleva tu cuerpo al siguiente nivel! Un entrenamiento explosivo de alta intensidad diseñado para aquellos que buscan superar sus límites. Desarrollarás máxima fuerza, potencia y resistencia muscular en una sesión retadora.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
 
     "optimove": ("🔄 *Optimove*\nEntrena con inteligencia. Una clase enfocada en la biomecánica, la corrección postural y la movilidad articular. Ideal para recuperarte activamente, prevenir lesiones y optimizar la forma en que tu cuerpo se mueve todos los días.\n\n¿Te gustaría ver nuestra tabla de costos o prefieres hablar con un asesor?", ["💲 Costos Fitness", "🗣️ Asesor"]),
+    # --- PAQUETES COMBO ---
+    "activa": ("💪 *Paquete ACTIVA (1 y 1)*\nEl equilibrio perfecto para arrancar. Disfruta de 🌊 1 día en agua (Nado Libre o Grupal) y 🧗🏽 1 día en tierra (Clase Fitness) a la semana. Ideal para mantenerte en forma combinando cardio y fuerza.\n\n👇 *¿Te comparto la inversión de este paquete o prefieres hablar con un asesor?*", ["💲 Costos ACTIVA", "🗣️ Asesor"]),
+    "impulsa": ("🔥 *Paquete IMPULSA (2 y 2)*\nConstancia que da resultados. Obtén 🌊 2 días de agua y 🧗🏽 2 días de Fitness en tierra. La mejor opción para quienes buscan mejorar su resistencia y tonificar de forma dinámica.\n\n👇 *¿Te comparto la inversión de este paquete o prefieres hablar con un asesor?*", ["💲 Costos IMPULSA", "🗣️ Asesor"]),
+    "evoluciona": ("🚀 *Paquete EVOLUCIONA (3 y 3)*\nTransformación total. Con 🌊 3 días en alberca y 🧗🏽 3 días en piso, llevarás tu acondicionamiento físico al siguiente nivel, trabajando todos los grupos musculares al máximo.\n\n👇 *¿Te comparto la inversión o te comunico con recepción?*", ["💲 Costos EVOLUCIONA", "🗣️ Asesor"]),
+    
+    "vitaliza": ("🐦‍🔥 *Paquete VITALIZA*\nEnfocado en tu bienestar articular. Incluye mínimo 2 clases combinando 🧗🏽 *Senior's Health* (bajo impacto) y *Rehabilitación Personalizada en Tierra*, donde te damos seguimiento uno a uno para recuperar tu fuerza y movilidad.\n\n👇 *¿Te comparto los costos de este paquete o prefieres hablar con un asesor?*", ["💲 Costos VITALIZA", "🗣️ Asesor"]),
+    "reanima": ("💦 *Paquete REANIMA*\nMovimiento y diversión sin impacto. Incluye mínimo 2 clases combinando 🧗🏽 *Senior's Health* en piso y 🌊 *Aquafitness* en alberca. Cuida tus articulaciones mientras mejoras tu salud cardiovascular al ritmo de la música.\n\n👇 *¿Te comparto los costos o te comunico con recepción?*", ["💲 Costos REANIMA", "🗣️ Asesor"]),
+    "acondiciona": ("🔄 *Paquete ACONDICIONA*\nCuidado integral para tu cuerpo. Incluye mínimo 3 clases combinando 🧗🏽 *Senior's Health* en piso, 🌊 *Rehabilitación Grupal en Agua* y *Aquafitness*. La mezcla ideal de terapia y ejercicio cardiovascular gentil.\n\n👇 *¿Te comparto la inversión o prefieres hablar con un asesor?*", ["💲 Costos ACONDICIONA", "🗣️ Asesor"]),
+    "fortaleza": ("🫂 *Paquete FORTALEZA*\nNuestro programa terapéutico más completo. Incluye mínimo 3 clases combinando 🧗🏽 *Senior's Health*, 🌊 *Rehabilitación Grupal en Agua* y *Rehabilitación Personalizada en Tierra*. Soporte total para recuperar tu calidad de vida.\n\n👇 *¿Te comparto los costos o te comunico con recepción?*", ["💲 Costos FORTALEZA", "🗣️ Asesor"]),
+    
+    "domina": ("🏆 *Paquete DOMINA (4 y 4)*\nPara atletas comprometidos. Un régimen de alto rendimiento que te otorga 🌊 4 días de entrenamiento en agua y 🧗🏽 4 días en tierra. Máxima disciplina, máximos resultados.\n\n👇 *¿Te comparto la inversión de este paquete o prefieres hablar con un asesor?*", ["💲 Costos DOMINA", "🗣️ Asesor"]),
+    "maximiza": ("♾️ *Paquete MAXIMIZA (Ilimitado)*\nSin barreras, sin límites. Acceso total e ilimitado a 🌊 Nado Libre, Clases Grupales para Adultos y 🧗🏽 Clases Fitness. Entrena lo que quieras, cuando quieras. Eres el dueño de tu rutina.\n\n👇 *¿Te comparto la inversión de tu acceso total o prefieres hablar con un asesor?*", ["💲 Costos MAXIMIZA", "🗣️ Asesor"]),
+
+
 }
 # 3. Firma Dinámica (Pie de mensaje para retención)
 FIRMA_DINAMICA = "\n\n¿Te puedo ayudar con algo más? 👇"
@@ -143,5 +157,45 @@ LISTA_INFANTILES = {
     ]
 }
 
+# ==========================================
+# MENÚS DE LISTA PARA COMBOS (FULL ENTRENADO)
+# ==========================================
+LOGO_CARMIN = "https://i.postimg.cc/2yrQmNWK/logo-carmin.png"
+TEXTO_MENU_COMBOS = "¡Mezclar disciplinas es el secreto del éxito en EntreNado! Hemos diseñado paquetes que combinan el poder del 🌊 Agua y la fuerza de la 🧗🏽 Tierra para llevarte a tu meta.\n\n👇 Elige el enfoque que mejor se adapte a lo que tu cuerpo necesita hoy:"
 
+TEXTO_ACTIVO = "💪 *Entrenamiento Activo*\nOpciones ideales para mantenerte en movimiento combinando Nado Libre o Grupales de Adultos con Clases Fitness. Elige tu ritmo:"
+LISTA_ACTIVO = {
+    "header": "Entrenamiento Activo 💪",
+    "button_text": "📋 Ver Paquetes",
+    "footer": "Club Deportivo EntreNado",
+    "sections": [{"title": "Opciones Disponibles", "rows": [
+        {"id": "c_activa", "title": "💪 ACTIVA (1 y 1)", "description": "1 día en Agua y 1 en Tierra"},
+        {"id": "c_impulsa", "title": "🔥 IMPULSA (2 y 2)", "description": "2 días en Agua y 2 en Tierra"},
+        {"id": "c_evoluciona", "title": "🚀 EVOLUCIONA (3 y 3)", "description": "3 días en Agua y 3 en Tierra"}
+    ]}]
+}
+
+TEXTO_RECUPERACION = "🐦‍🔥 *Recuperación y Movilidad*\nNuestros programas de cuidado integral y bajo impacto. Elige la combinación terapéutica ideal:"
+LISTA_RECUPERACION = {
+    "header": "Recuperación 🐦‍🔥",
+    "button_text": "📋 Ver Paquetes",
+    "footer": "Club Deportivo EntreNado",
+    "sections": [{"title": "Opciones Disponibles", "rows": [
+        {"id": "c_vitaliza", "title": "🌿 VITALIZA", "description": "Rehab. Personalizada Tierra + Senior's"},
+        {"id": "c_reanima", "title": "💦 REANIMA", "description": "Aquafitness + Senior's Health"},
+        {"id": "c_acondiciona", "title": "🔄 ACONDICIONA", "description": "Senior's + Rehab. Agua + Aquafit"},
+        {"id": "c_fortaleza", "title": "🫂 FORTALEZA", "description": "Senior's + Rehab. Agua + Rehab. Tierra"}
+    ]}]
+}
+
+TEXTO_RENDIMIENTO = "⚡ *Alto Rendimiento*\nPara súper usuarios y atletas comprometidos sin barreras. Elige tu nivel:"
+LISTA_RENDIMIENTO = {
+    "header": "Alto Rendimiento ⚡",
+    "button_text": "📋 Ver Paquetes",
+    "footer": "Club Deportivo EntreNado",
+    "sections": [{"title": "Opciones Disponibles", "rows": [
+        {"id": "c_domina", "title": "🏆 DOMINA (4 y 4)", "description": "4 días en Agua y 4 en Tierra"},
+        {"id": "c_maximiza", "title": "♾️ MAXIMIZA", "description": "Acceso Ilimitado Total"}
+    ]}]
+}
 
