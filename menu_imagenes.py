@@ -170,8 +170,7 @@ CATALOGO_IMAGENES = {
 
 
 
-# --- PAQUETES COMBO (FULL ENTRENADO) ---
-    "combo_activa": {
+"combo_activa": {
         "textos": ["Aquí tienes la tabla de inversión para el Paquete ACTIVA. 💪"],
         "links": ["https://i.postimg.cc/HsQFtPfH/ACTIVA.png"],
         "palabras_clave": ["costos activa", "precio activa", "activa"]
