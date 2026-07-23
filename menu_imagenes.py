@@ -163,9 +163,7 @@ CATALOGO_IMAGENES = {
             """🏊‍♀️💪 ¿Por qué elegir solo una disciplina cuando puedes disfrutar de ambas?\nLos paquetes de EntreNado combinan las clases grupales de natación con nuestras Clases ÷Tierra, ofreciéndote una experiencia más completa para desarrollar condición física, mejorar tu movilidad, fortalecer tu cuerpo y mantener una rutina variada y motivadora.\n📌 En la imagen encontrarás las distintas combinaciones disponibles para que elijas la que mejor se adapte a ti.\n💙 Si gustas conocer más detalles o agendar una clase muestra, con gusto uno de nuestros asesores podrá ayudarte.""",
             """🌊💙 En EntreNado creemos que el bienestar se construye tanto dentro como fuera del agua.\nPor eso nuestros paquetes te permiten combinar las clases grupales de natación (÷Agua) con cualquiera de nuestras Clases ÷Tierra, creando una experiencia de entrenamiento más completa y equilibrada.\nMientras en el agua desarrollarás habilidades acuáticas, coordinación y acondicionamiento físico con un bajo impacto para las articulaciones, las disciplinas de ÷Tierra complementarán ese trabajo fortaleciendo la fuerza, la movilidad, la resistencia, la flexibilidad y el bienestar general.\nLo mejor es que tú eliges la combinación que mejor se adapta a tus objetivos, disponibilidad y ritmo de vida, para crear una experiencia verdaderamente personalizada.\n📌 En la imagen encontrarás las diferentes opciones de paquetes para ayudarte a elegir la que más se adapte a ti.\n💙 Si gustas conocer más detalles o agendar una clase muestra, con gusto te pondremos en contacto con uno de nuestros asesores, quienes resolverán todas tus dudas y te ayudarán a encontrar la combinación ideal para formar parte de la comunidad EntreNado."""
         ]
-    }
-},
-
+    },
 
 
 
@@ -215,3 +213,5 @@ CATALOGO_IMAGENES = {
         "links": ["https://i.postimg.cc/zfNTcqnY/MAXIMIZA.png"],
         "palabras_clave": ["costos maximiza", "precio maximiza", "maximiza", "ilimitado"]
     }
+}
+    
