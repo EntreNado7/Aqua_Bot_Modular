@@ -198,17 +198,29 @@ def procesar_mensaje(identificador, texto):
         "🧑 adultos", "adultos",
         "👧 infantiles/juv", "infantiles", "juveniles", "infantiles/juv",
         "👶 bebés", "bebes",
-        "💪 entrenamiento activo", "entrenamiento activo",
-        "🐦‍🔥 recuperación/movilidad", "recuperación/movilidad", "recuperacion/movilidad",
+        
+        # --- Nombres Nuevos de Botones Combos ---
+        "💪 modo activo", "modo activo",
+        "🐦‍🔥 movilidad integral", "movilidad integral",
         "⚡ alto rendimiento", "alto rendimiento",
-        # --- Combos Específicos ---
-        "activa", "impulsa", "evoluciona", "vitaliza", "reanima", 
-        "acondiciona", "fortaleza", "domina", "maximiza",
+        
+        # --- Títulos Exactos de las Listas de Combos ---
+        "💪 activa (1 y 1)", "activa", 
+        "🔥 impulsa (2 y 2)", "impulsa", 
+        "🚀 evoluciona (3 y 3)", "evoluciona", 
+        "🌿 vitaliza", "vitaliza", 
+        "💦 reanima", "reanima", 
+        "🔄 acondiciona", "acondiciona", 
+        "🫂 fortaleza", "fortaleza", 
+        "🏆 domina (4 y 4)", "domina", 
+        "♾️ maximiza", "maximiza",
+        
         # --- Disciplinas Tierra ---
         "🚴 spinning", "spinning", "🧘 yoga", "yoga", "🍑 gap", "gap",
         "💪 funcional", "funcional", "💃 fitdance", "fitdance",
         "👵 senior health", "senior health", "senior",
         "⚡ full power", "full power", "🔄 optimove", "optimove",
+        
         # --- Disciplinas Agua ---
         "🐬 grupales infantiles", "grupales infantiles",
         "⭐ infantiles personal", "infantiles personal",
@@ -216,6 +228,7 @@ def procesar_mensaje(identificador, texto):
         "⭐ adultos personal", "adultos personal",
         "👩‍👦 mamá & bebé", "mamá & bebé", "mama & bebe", "mama", "mamá",
         "🩹 rehabilitación", "rehabilitación", "rehabilitacion",
+        
         # --- Botones de Cierre y Venta ---
         "💲 costos fitness", "costos fitness", "💲 costos box", "costos box", "💲 costos open gym", "costos open gym",
         "💲 costos bebés", "costos bebés", "💲 costos infantiles", "costos infantiles",
@@ -302,14 +315,14 @@ def procesar_mensaje(identificador, texto):
         desc_texto, desc_botones = respuestas.DESCRIPCIONES["open gym"]
         return desc_texto, None, desc_botones
 
-    # 3.3 BIFURCACIONES DE COMBOS (FULL ENTRENADO)
+# 3.3 BIFURCACIONES DE COMBOS (FULL ENTRENADO)
     elif texto in ["⚡ full entrenado", "full entrenado", "combos"]:
-        return respuestas.TEXTO_MENU_COMBOS, respuestas.LOGO_CARMIN, ["💪 Entrenamiento Activo", "🐦‍🔥 Recuperación/Movilidad", "⚡ Alto Rendimiento"]
+        return respuestas.TEXTO_MENU_COMBOS, respuestas.LOGO_CARMIN, ["💪 Modo Activo", "🐦‍🔥 Movilidad Integral", "⚡ Alto Rendimiento"]
         
-    elif texto in ["💪 entrenamiento activo", "entrenamiento activo"]:
+    elif texto in ["💪 modo activo", "modo activo"]:
         return respuestas.TEXTO_ACTIVO, None, respuestas.LISTA_ACTIVO
         
-    elif texto in ["🐦‍🔥 recuperación/movilidad", "recuperación/movilidad", "recuperacion/movilidad"]:
+    elif texto in ["🐦‍🔥 movilidad integral", "movilidad integral"]:
         return respuestas.TEXTO_RECUPERACION, None, respuestas.LISTA_RECUPERACION
         
     elif texto in ["⚡ alto rendimiento", "alto rendimiento"]:
